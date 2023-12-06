@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    QuadrantScreen()
                 }
             }
         }
@@ -39,43 +40,64 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun QuadrantScreen(name: String, modifier: Modifier = Modifier) {
-    Row (){
-        Quadrant(
-            stringResource(id = R.string.first_title),
-            stringResource(id = R.string.first_description),
-        )
-        Quadrant(
-            stringResource(id = R.string.second_title),
-            stringResource(id = R.string.second_description),
-        )
-    }
-    Row {
-        Quadrant(
-            stringResource(id = R.string.third_title),
-            stringResource(id = R.string.third_description),
-        )
-        Quadrant(
-            stringResource(id = R.string.fourth_title),
-            stringResource(id = R.string.fourth_description),
-        )
+fun QuadrantScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+    ) {
+        Row(modifier = Modifier.weight(1f)) {
+            Quadrant(
+                stringResource(id = R.string.first_title),
+                stringResource(id = R.string.first_description),
+                modifier = Modifier.weight(1f),
+                background = Color(0xFFEADDFF)
+            )
+            Quadrant(
+                stringResource(id = R.string.second_title),
+                stringResource(id = R.string.second_description),
+                modifier = Modifier.weight(1f),
+                background = Color(0xFFD0BCFF)
+            )
+        }
+        Row(modifier = Modifier.weight(1f)) {
+            Quadrant(
+                stringResource(id = R.string.third_title),
+                stringResource(id = R.string.third_description),
+                modifier = Modifier.weight(1f),
+                background = Color(0xFFD0BCFF)
+            )
+            Quadrant(
+                stringResource(id = R.string.fourth_title),
+                stringResource(id = R.string.fourth_description),
+                modifier = Modifier.weight(1f)
+            )
+        }
     }
 
 }
 
 @Composable
-fun Quadrant(title: String, content: String, modifier: Modifier = Modifier) {
+fun Quadrant(
+    title: String,
+    content: String,
+    background: Color,
+    modifier: Modifier = Modifier
+) {
 
     Column(
+
         modifier = modifier
             .fillMaxHeight()
             .fillMaxWidth()
             .padding(16.dp)
 
+
     ) {
-        Text(text = title,
+        Text(
+            text = title,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center)
+            textAlign = TextAlign.Center
+        )
         Text(text = content, textAlign = TextAlign.Justify)
     }
 
@@ -84,7 +106,6 @@ fun Quadrant(title: String, content: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CursoAndroidComposeTheme {
-        Quadrant(stringResource(id = R.string.first_title),stringResource(id = R.string.first_description), )
-    }
+
+    QuadrantScreen()
 }
