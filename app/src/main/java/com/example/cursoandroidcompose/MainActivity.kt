@@ -3,6 +3,7 @@ package com.example.cursoandroidcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -46,30 +47,32 @@ fun QuadrantScreen(modifier: Modifier = Modifier) {
             .fillMaxWidth()
     ) {
         Row(modifier = Modifier.weight(1f)) {
-            Quadrant(
-                stringResource(id = R.string.first_title),
-                stringResource(id = R.string.first_description),
+            QuadrantInfoCard(
+               title =  stringResource(id = R.string.first_title),
+               content =  stringResource(id = R.string.first_description),
                 modifier = Modifier.weight(1f),
                 background = Color(0xFFEADDFF)
             )
-            Quadrant(
-                stringResource(id = R.string.second_title),
-                stringResource(id = R.string.second_description),
+            QuadrantInfoCard(
+               title = stringResource(id = R.string.second_title),
+               content =  stringResource(id = R.string.second_description),
                 modifier = Modifier.weight(1f),
                 background = Color(0xFFD0BCFF)
             )
         }
         Row(modifier = Modifier.weight(1f)) {
-            Quadrant(
-                stringResource(id = R.string.third_title),
-                stringResource(id = R.string.third_description),
+            QuadrantInfoCard(
+               title = stringResource(id = R.string.third_title),
+               content = stringResource(id = R.string.third_description),
                 modifier = Modifier.weight(1f),
                 background = Color(0xFFD0BCFF)
             )
-            Quadrant(
-                stringResource(id = R.string.fourth_title),
-                stringResource(id = R.string.fourth_description),
-                modifier = Modifier.weight(1f)
+            QuadrantInfoCard(
+                title = stringResource(id = R.string.fourth_title),
+                content = stringResource(id = R.string.fourth_description),
+                modifier = Modifier.weight(1f),
+                background = Color(0xFFF6EDFF)
+
             )
         }
     }
@@ -77,21 +80,19 @@ fun QuadrantScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Quadrant(
+fun QuadrantInfoCard(
     title: String,
     content: String,
     background: Color,
     modifier: Modifier = Modifier
 ) {
-
     Column(
 
         modifier = modifier
             .fillMaxHeight()
             .fillMaxWidth()
+            .background(background)
             .padding(16.dp)
-
-
     ) {
         Text(
             text = title,
