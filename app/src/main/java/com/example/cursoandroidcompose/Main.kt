@@ -102,8 +102,8 @@ class SmartLightDevice(deviceName: String, deviceCategory: String) :
 
 
 class SmartHome(
-    val smartTvDevice: SmartTvDevice,
-    val smartLightDevice: SmartLightDevice,
+    private val smartTvDevice: SmartTvDevice,
+    private val smartLightDevice: SmartLightDevice,
 ) {
     var deviceTurnOnCount = 0
         private set
@@ -168,8 +168,10 @@ class SmartHome(
     }
 
     fun turnOffAllDevices() {
-        turnOffTv()
-        turnOffLight()
+        if (smartTvDevice.deviceStatus == "on" || smartLightDevice.deviceStatus == "on") {
+            turnOffTv()
+            turnOffLight()
+        }
     }
 
     fun printSmartTvInfo() {
@@ -216,22 +218,23 @@ fun main() {
 
     var smartTvDevice = SmartTvDevice("Android TV", "Entertainment")
     var smartLightDevice = SmartLightDevice("Google Light", "Utility")
-    var smartHome: SmartHome = SmartHome(smartTvDevice,smartLightDevice)
+    var smartHome: SmartHome = SmartHome(smartTvDevice, smartLightDevice)
 
-    smartHome.smartTvDevice.printDeviceInfo()
+
+    smartHome.printSmartTvInfo()
+    smartHome.turnOffAllDevices()
+    smartHome.increaseTvVolume()
+    smartHome.decreaseTvVolume()
+    smartLightDevice.increaseBrightness()
     smartHome.printSmartTvInfo()
 
-    //encender Tv
-    smartHome.smartTvDevice.turnOn()
+    smartHome.printSmartLightInfo()
 
-    smartHome.smartTvDevice.printDeviceInfo()
-    smartHome.smartTvDevice.increaseSpeakerVolume()
-    smartHome.smartTvDevice.decreaseVolume()
 
-    smartHome.smartLightDevice.printDeviceInfo()
-    smartHome.smartLightDevice.decreasedBrightness()
-    smartHome.smartLightDevice.turnOn()
-    smartHome.smartLightDevice.printDeviceInfo()
+    smartHome.decreaseLightBrightness()
+
+
+    smartHome.printSmartLightInfo()
 
 
     //encender
