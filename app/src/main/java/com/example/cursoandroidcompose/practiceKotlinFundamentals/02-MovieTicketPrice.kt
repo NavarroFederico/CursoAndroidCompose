@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose
+package com.example.cursoandroidcompose.practiceKotlinFundamentals
 
 fun main() {
     val child = 5
@@ -23,13 +23,8 @@ fun ticketPrice(age: Int, isMonday: Boolean): Int {
     // Fill in the code.
     return when {
         age in 0..12 -> 15
-        age in 13..60 -> {
-            if (isMonday) 30 else 5
-        }
-
+        age in 13..60 -> if (isMonday) 30 else 5
         age in 61..100 -> 20
-        else -> {
-            -1
-        }
+        else -> -1
     }
 }

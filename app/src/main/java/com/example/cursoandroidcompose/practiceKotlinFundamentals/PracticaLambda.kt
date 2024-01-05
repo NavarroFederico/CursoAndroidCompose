@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose
+package com.example.cursoandroidcompose.practiceKotlinFundamentals
 
 fun main() {
     //   val coins: (Int) -> String = {  "$it quarters" }

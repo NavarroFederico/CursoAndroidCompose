@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose
+package com.example.cursoandroidcompose.practiceKotlinFundamentals
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
