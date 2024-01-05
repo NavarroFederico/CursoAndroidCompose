@@ -15,13 +15,17 @@ open class Phone(var isScreenLightOn: Boolean = false) {
     }
 }
 
-class FoldablePhone(var isFoldable: Boolean = false) : Phone() {
-    fun switchFoldable(){
-        isFoldable = !isFoldable
+class FoldablePhone(var isFolded: Boolean = false) : Phone() {
+    fun fold() {
+        isFolded = true
+    }
+
+    fun unfold() {
+        isFolded = false
     }
 
     override fun switchOn() {
-        if(!isFoldable) super.switchOn()
+        if (!isFolded) super.switchOn()
     }
 
 }
@@ -34,3 +38,4 @@ fun main() {
     newFoldablePhone.unfold()
     newFoldablePhone.switchOn()
     newFoldablePhone.checkPhoneScreenLight()
+}
