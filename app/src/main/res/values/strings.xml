@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">CursoAndroidCompose</string>
-    <string name="roll">Roll</string>
+    <string name="Tap_the_lemon_tree_to_select_a_lemon">Tap the lemon tree to select a lemon</string>
+    <string name="Keep_tapping_the_lemon_to_squeeze_it">Keep tapping the lemon to squeeze it</string>
+    <string name="Tap_the_lemonade_to_drink_it">Tap the lemonade to drink it</string>
+    <string name="Tap_the_empty_glass_to_start_again">Tap the empty glass to start again</string>
+
+    //content descriptions
+    <string name="lemon_tree_content_description">Lemon tree</string>
+    <string name="lemon_content_description">Lemon</string>
+    <string name="glass_of_lemonade_content_description">Glass of lemonade</string>
+    <string name="empty_glass_content_description">Empty glass</string>
+
 </resources>
