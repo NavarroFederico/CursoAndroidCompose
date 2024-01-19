@@ -13,11 +13,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -117,61 +123,80 @@ fun LemonAppV1() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LemonAppV2() {
     var currentStep by remember { mutableStateOf(1) }
-    var randomNum by remember { mutableStateOf(1) }
     var tapCount by remember { mutableStateOf(0) }
-    // A surface container using the 'background' color from the theme
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        when (currentStep) {
-            1 -> LemonTextAndImage(
-                idText = R.string.Tap_the_lemon_tree_to_select_a_lemon,
-                idImageResource = R.drawable.lemon_tree,
-                idContentDescription = R.string.lemon_tree_content_description,
-                onStartClicked = {
-                    randomNum = (2..4).random()
-                    currentStep = 2
-                    Log.d("Log", "$tapCount $randomNum")
 
-                }
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.app_name),
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+
+                    )
             )
+        },
+        contentColor = MaterialTheme.colorScheme.primaryContainer
+    ) { innerPadding ->
+        // A surface container using the 'background' color from the theme
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            when (currentStep) {
+                1 -> LemonTextAndImage(
+                    idText = R.string.Tap_the_lemon_tree_to_select_a_lemon,
+                    idImageResource = R.drawable.lemon_tree,
+                    idContentDescription = R.string.lemon_tree_content_description,
+                    onStartClicked = {
+                        tapCount = (2..4).random()
+                        currentStep = 2
+                        Log.d("Log", "$tapCount ")
 
-            2 -> LemonTextAndImage(
-                idText = R.string.Keep_tapping_the_lemon_to_squeeze_it,
-                idImageResource = R.drawable.lemon_squeeze,
-                idContentDescription = R.string.lemon_content_description
-            ) {
-                Log.d("Log", "$tapCount $randomNum")
+                    }
+                )
 
-                if (tapCount == randomNum) {
-                    currentStep = 3
-                    tapCount = 0
-                } else {
-                    tapCount++
-                    Log.d("Log", "$tapCount $randomNum")
+                2 -> LemonTextAndImage(
+                    idText = R.string.Keep_tapping_the_lemon_to_squeeze_it,
+                    idImageResource = R.drawable.lemon_squeeze,
+                    idContentDescription = R.string.lemon_content_description
+                ) {
+                    tapCount--
+                    if (tapCount == 0) currentStep = 3
+                    Log.d("Log", "$tapCount ")
+
                 }
 
+                3 -> LemonTextAndImage(
+                    idText = R.string.Tap_the_lemonade_to_drink_it,
+                    idImageResource = R.drawable.lemon_drink,
+                    idContentDescription = R.string.glass_of_lemonade_content_description,
+                    onStartClicked = { currentStep = 4 })
+
+                4 -> LemonTextAndImage(
+                    idText = R.string.Tap_the_empty_glass_to_start_again,
+                    idImageResource = R.drawable.lemon_restart,
+                    idContentDescription = R.string.empty_glass_content_description,
+                    onStartClicked = { currentStep = 1 })
             }
 
-            3 -> LemonTextAndImage(
-                idText = R.string.Tap_the_lemonade_to_drink_it,
-                idImageResource = R.drawable.lemon_drink,
-                idContentDescription = R.string.glass_of_lemonade_content_description,
-                onStartClicked = { currentStep = 4 })
 
-            4 -> LemonTextAndImage(
-                idText = R.string.Tap_the_empty_glass_to_start_again,
-                idImageResource = R.drawable.lemon_restart,
-                idContentDescription = R.string.empty_glass_content_description,
-                onStartClicked = { currentStep = 1 })
         }
 
-
     }
+
+
 }
 
 @Composable
@@ -196,7 +221,7 @@ fun LemonTextAndImage(
                     color = Color(105, 205, 216),
                     shape = RoundedCornerShape(20.dp)
                 )
-                .background(color = Color(105, 205, 216), shape = RoundedCornerShape(20.dp))
+                .background(color = Color(195, 236, 210), shape = RoundedCornerShape(20.dp))
                 .clickable(onClickLabel = "Click Image", onClick = onStartClicked)
         )
 
