@@ -45,87 +45,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LemonadeTheme {
-                LemonAppV2()
+                LemonAppV1()
             }
         }
     }
 }
 
-@Composable
-fun LemonAppV1() {
-    var currentStep by remember { mutableStateOf(1) }
-    val imageResource = when (currentStep) {
-        1 -> R.drawable.lemon_tree
-        2 -> R.drawable.lemon_squeeze
-        3 -> R.drawable.lemon_drink
-        else -> R.drawable.lemon_restart
-    }
-
-    val contentDescription = when (currentStep) {
-        1 -> stringResource(id = R.string.lemon_tree_content_description)
-        2 -> stringResource(id = R.string.lemon_content_description)
-        3 -> stringResource(id = R.string.glass_of_lemonade_content_description)
-        else -> stringResource(id = R.string.empty_glass_content_description)
-    }
-
-    val textDescription = when (currentStep) {
-        1 -> stringResource(id = R.string.Tap_the_lemon_tree_to_select_a_lemon)
-        2 -> stringResource(id = R.string.Keep_tapping_the_lemon_to_squeeze_it)
-        3 -> stringResource(id = R.string.Tap_the_lemonade_to_drink_it)
-        else -> {
-            stringResource(id = R.string.Tap_the_empty_glass_to_start_again)
-        }
-    }
-
-    // A surface container using the 'background' color from the theme
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(imageResource),
-                contentDescription = contentDescription,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .border(
-                        width = 2.dp,
-                        color = Color(105, 205, 216),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .background(color = Color(105, 205, 216), shape = RoundedCornerShape(20.dp))
-                    .clickable(onClickLabel = "Click Image", onClick = {
-
-                        when (currentStep) {
-                            1 -> currentStep = 2
-                            2 -> currentStep = 3
-                            3 -> currentStep = 4
-                            4 -> currentStep = 1
-
-                        }
-                    })
-
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = textDescription,
-                fontSize = 18.sp,
-            )
-
-
-        }
-
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LemonAppV2() {
+fun LemonAppV1() {
     var currentStep by remember { mutableStateOf(1) }
     var tapCount by remember { mutableStateOf(0) }
 
@@ -233,11 +162,83 @@ fun LemonTextAndImage(
     }
 }
 
+@Composable
+fun LemonAppV2() {
+    var currentStep by remember { mutableStateOf(1) }
+    val imageResource = when (currentStep) {
+        1 -> R.drawable.lemon_tree
+        2 -> R.drawable.lemon_squeeze
+        3 -> R.drawable.lemon_drink
+        else -> R.drawable.lemon_restart
+    }
+
+    val contentDescription = when (currentStep) {
+        1 -> stringResource(id = R.string.lemon_tree_content_description)
+        2 -> stringResource(id = R.string.lemon_content_description)
+        3 -> stringResource(id = R.string.glass_of_lemonade_content_description)
+        else -> stringResource(id = R.string.empty_glass_content_description)
+    }
+
+    val textDescription = when (currentStep) {
+        1 -> stringResource(id = R.string.Tap_the_lemon_tree_to_select_a_lemon)
+        2 -> stringResource(id = R.string.Keep_tapping_the_lemon_to_squeeze_it)
+        3 -> stringResource(id = R.string.Tap_the_lemonade_to_drink_it)
+        else -> {
+            stringResource(id = R.string.Tap_the_empty_glass_to_start_again)
+        }
+    }
+
+    // A surface container using the 'background' color from the theme
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(imageResource),
+                contentDescription = contentDescription,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .border(
+                        width = 2.dp,
+                        color = Color(105, 205, 216),
+                        shape = RoundedCornerShape(20.dp)
+                    )
+                    .background(color = Color(105, 205, 216), shape = RoundedCornerShape(20.dp))
+                    .clickable(onClickLabel = "Click Image", onClick = {
+
+                        when (currentStep) {
+                            1 -> currentStep = 2
+                            2 -> currentStep = 3
+                            3 -> currentStep = 4
+                            4 -> currentStep = 1
+
+                        }
+                    })
+
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = textDescription,
+                fontSize = 18.sp,
+            )
+
+
+        }
+
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     LemonadeTheme {
-        LemonAppV2()
+        LemonAppV1()
     }
 }
 
