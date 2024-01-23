@@ -1,28 +1,25 @@
 package com.example.cursoandroidcompose
 
+
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,215 +27,90 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.cursoandroidcompose.ui.theme.LemonadeTheme
+import com.example.cursoandroidcompose.ui.theme.TipCalculatorTheme
+import java.text.NumberFormat
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LemonadeTheme {
-                LemonAppV1()
+            TipCalculatorTheme {
+                Surface() {
+                    TipTimeLayout()
+                }
+
             }
         }
     }
 }
 
+@Composable
+fun TipTimeLayout() {
+    Column(
+        modifier = Modifier
+            .statusBarsPadding()
+            .padding(horizontal = 40.dp)
+            .verticalScroll(rememberScrollState())
+            .safeDrawingPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+
+    ) {
+        Text(
+            text = stringResource(id = R.string.calculate_tip),
+            modifier = Modifier
+                .padding(bottom = 16.dp, top = 40.dp)
+                .align(alignment = Alignment.Start)
+        )
+        EditNumberField(
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth()
+        )
+        Text(
+            text = stringResource(id = R.string.tip_amout, "$0.00"),
+            style = MaterialTheme.typography.displaySmall
+        )
+        Spacer(modifier = Modifier.height(150.dp))
+
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LemonAppV1() {
-    var currentStep by remember { mutableStateOf(1) }
-    var tapCount by remember { mutableStateOf(0) }
-
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-
-                    )
-            )
-        },
-        contentColor = MaterialTheme.colorScheme.primaryContainer
-    ) { innerPadding ->
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            when (currentStep) {
-                1 -> LemonTextAndImage(
-                    idText = R.string.Tap_the_lemon_tree_to_select_a_lemon,
-                    idImageResource = R.drawable.lemon_tree,
-                    idContentDescription = R.string.lemon_tree_content_description,
-                    onStartClicked = {
-                        tapCount = (2..4).random()
-                        currentStep = 2
-                        Log.d("Log", "$tapCount ")
-
-                    }
-                )
-
-                2 -> LemonTextAndImage(
-                    idText = R.string.Keep_tapping_the_lemon_to_squeeze_it,
-                    idImageResource = R.drawable.lemon_squeeze,
-                    idContentDescription = R.string.lemon_content_description
-                ) {
-                    tapCount--
-                    if (tapCount == 0) currentStep = 3
-                    Log.d("Log", "$tapCount ")
-
-                }
-
-                3 -> LemonTextAndImage(
-                    idText = R.string.Tap_the_lemonade_to_drink_it,
-                    idImageResource = R.drawable.lemon_drink,
-                    idContentDescription = R.string.glass_of_lemonade_content_description,
-                    onStartClicked = { currentStep = 4 })
-
-                4 -> LemonTextAndImage(
-                    idText = R.string.Tap_the_empty_glass_to_start_again,
-                    idImageResource = R.drawable.lemon_restart,
-                    idContentDescription = R.string.empty_glass_content_description,
-                    onStartClicked = { currentStep = 1 })
-            }
-
-
-        }
+fun EditNumberField(modifier: Modifier = Modifier) {
+    var amountInput by remember {
+        mutableStateOf("")
 
     }
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
 
-
+    val tip = calculateTip(amount)
+    TextField(
+        value = amountInput,
+        onValueChange = { amountInput = it },
+        label = { Text(text = stringResource(id = R.string.bill_amount)) },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        modifier = modifier,
+    )
 }
 
-@Composable
-fun LemonTextAndImage(
-    idText: Int,
-    idImageResource: Int,
-    idContentDescription: Int,
-    onStartClicked: () -> Unit
-) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painterResource(id = idImageResource),
-            contentDescription = stringResource(id = idContentDescription),
-            modifier = Modifier
-                .wrapContentSize()
-                .border(
-                    width = 2.dp,
-                    color = Color(105, 205, 216),
-                    shape = RoundedCornerShape(20.dp)
-                )
-                .background(color = Color(195, 236, 210), shape = RoundedCornerShape(20.dp))
-                .clickable(onClickLabel = "Click Image", onClick = onStartClicked)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = stringResource(id = idText),
-            fontSize = 18.sp,
-        )
-    }
-}
-
-@Composable
-fun LemonAppV2() {
-    var currentStep by remember { mutableStateOf(1) }
-    val imageResource = when (currentStep) {
-        1 -> R.drawable.lemon_tree
-        2 -> R.drawable.lemon_squeeze
-        3 -> R.drawable.lemon_drink
-        else -> R.drawable.lemon_restart
-    }
-
-    val contentDescription = when (currentStep) {
-        1 -> stringResource(id = R.string.lemon_tree_content_description)
-        2 -> stringResource(id = R.string.lemon_content_description)
-        3 -> stringResource(id = R.string.glass_of_lemonade_content_description)
-        else -> stringResource(id = R.string.empty_glass_content_description)
-    }
-
-    val textDescription = when (currentStep) {
-        1 -> stringResource(id = R.string.Tap_the_lemon_tree_to_select_a_lemon)
-        2 -> stringResource(id = R.string.Keep_tapping_the_lemon_to_squeeze_it)
-        3 -> stringResource(id = R.string.Tap_the_lemonade_to_drink_it)
-        else -> {
-            stringResource(id = R.string.Tap_the_empty_glass_to_start_again)
-        }
-    }
-
-    // A surface container using the 'background' color from the theme
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(imageResource),
-                contentDescription = contentDescription,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .border(
-                        width = 2.dp,
-                        color = Color(105, 205, 216),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .background(color = Color(105, 205, 216), shape = RoundedCornerShape(20.dp))
-                    .clickable(onClickLabel = "Click Image", onClick = {
-
-                        when (currentStep) {
-                            1 -> currentStep = 2
-                            2 -> currentStep = 3
-                            3 -> currentStep = 4
-                            4 -> currentStep = 1
-
-                        }
-                    })
-
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = textDescription,
-                fontSize = 18.sp,
-            )
-
-
-        }
-
-    }
+private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
+    val tip = tipPercent / 100 * amount
+    return NumberFormat.getCurrencyInstance().format(tip)
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    LemonadeTheme {
-        LemonAppV1()
+fun TipTimeLayoutPreview() {
+    TipCalculatorTheme {
+        TipTimeLayout()
     }
 }
 
