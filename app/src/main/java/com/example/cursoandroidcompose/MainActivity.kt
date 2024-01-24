@@ -54,7 +54,7 @@ fun TipTimeLayout() {
     var amountInput by remember { mutableStateOf("") }
     val discountLimit = amountInput.toDoubleOrNull() ?: 0.0
     val discountPercent = 40.0
-    val purchaseLimit = calculatePurchaseLimit(discountLimit)
+    val purchaseLimit = calculatePurchaseLimit(discountLimit, discountPercent)
     val finalCost = calculateCostFinal(purchaseLimit, discountLimit)
     Column(
         modifier = Modifier
@@ -114,7 +114,7 @@ fun EditNumberField(value: String, onValueChange: (String) -> Unit, modifier: Mo
     )
 }
 
-private fun calculatePurchaseLimit(discountLimit: Double, discountPercent: Double = 40.0): String {
+private fun calculatePurchaseLimit(discountLimit: Double, discountPercent: Double = 20.0): String {
     val purchaseLimit = discountLimit * 100 / discountPercent
     return NumberFormat.getCurrencyInstance().format(purchaseLimit)
 }
