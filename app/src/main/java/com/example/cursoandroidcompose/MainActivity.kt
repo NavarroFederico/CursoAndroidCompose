@@ -86,10 +86,10 @@ fun TipTimeLayout() {
         Text(
             text = stringResource(
                 id = R.string.with_discount_percent,
-                discountLimit
+                discountPercent
             )
                     + "\n" +
-                    stringResource(id = R.string.and_discount_limit, discountPercent)
+                    stringResource(id = R.string.and_discount_limit, discountLimit)
                     + "\n" +
                     stringResource(id = R.string.final_cost, finalCost),
             textAlign = TextAlign.Left,
