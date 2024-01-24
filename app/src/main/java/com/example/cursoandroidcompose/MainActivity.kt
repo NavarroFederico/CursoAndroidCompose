@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cursoandroidcompose.ui.theme.TipCalculatorTheme
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TipCalculatorTheme {
-                Surface() {
+                Surface {
                     TipTimeLayout()
                 }
             }
@@ -51,9 +52,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TipTimeLayout() {
     var amountInput by remember { mutableStateOf("") }
-    val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tip = calculateTip(amount)
-
+    val discountLimit = amountInput.toDoubleOrNull() ?: 0.0
+    val discountPercent = 40.0
+    val purchaseLimit = calculatePurchaseLimit(discountLimit)
+    val finalCost = calculateCostFinal(purchaseLimit, discountLimit)
     Column(
         modifier = Modifier
             .statusBarsPadding()
@@ -65,7 +67,7 @@ fun TipTimeLayout() {
 
     ) {
         Text(
-            text = stringResource(id = R.string.calculate_tip),
+            text = stringResource(id = R.string.calculate_max_discount),
             modifier = Modifier
                 .padding(bottom = 16.dp, top = 40.dp)
                 .align(alignment = Alignment.Start)
@@ -78,8 +80,20 @@ fun TipTimeLayout() {
                 .fillMaxWidth()
         )
         Text(
-            text = stringResource(id = R.string.tip_amout, tip),
+            text = stringResource(id = R.string.maximum_purchase_amount, purchaseLimit),
             style = MaterialTheme.typography.displaySmall
+        )
+        Text(
+            text = stringResource(
+                id = R.string.with_discount_percent,
+                discountLimit
+            )
+                    + "\n" +
+                    stringResource(id = R.string.and_discount_limit, discountPercent)
+                    + "\n" +
+                    stringResource(id = R.string.final_cost, finalCost),
+            textAlign = TextAlign.Left,
+            modifier = Modifier.align(alignment = Alignment.Start)
         )
         Spacer(modifier = Modifier.height(150.dp))
 
@@ -93,16 +107,21 @@ fun EditNumberField(value: String, onValueChange: (String) -> Unit, modifier: Mo
     TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(text = stringResource(id = R.string.bill_amount)) },
+        label = { Text(text = stringResource(id = R.string.discount_limit)) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = modifier,
     )
 }
 
-private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
-    val tip = tipPercent / 100 * amount
-    return NumberFormat.getCurrencyInstance().format(tip)
+private fun calculatePurchaseLimit(discountLimit: Double, discountPercent: Double = 40.0): String {
+    val purchaseLimit = discountLimit * 100 / discountPercent
+    return NumberFormat.getCurrencyInstance().format(purchaseLimit)
+}
+
+private fun calculateCostFinal(purchaseLimit: String, discountLimit: Double): String {
+    val finalCost = (purchaseLimit.toDoubleOrNull() ?: 0.0) - discountLimit
+    return NumberFormat.getCurrencyInstance().format(finalCost)
 }
 
 @Preview(showBackground = true)
