@@ -32,4 +32,21 @@ class GetMaxDiscountsCalculatorAppIUTest {
         composeTestRule.onNodeWithText("Maximum purchase amount: $expectedPurchaseAmount")
             .assertExists("No node with this text was found.")
     }
+
+    @Test
+    fun calculateMaxPurchaseAmount_3000DiscountLimit_And_20PercentDiscountInSpanish() {
+        composeTestRule.setContent {
+            TipCalculatorTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    TipTimeLayout()
+                }
+            }
+        }
+        composeTestRule.onNodeWithText("Tope de descuento").performTextInput("3000")
+        composeTestRule.onNodeWithText("Porcentaje de descuento").performTextInput("20")
+
+        val expectedPurchaseAmount = NumberFormat.getCurrencyInstance().format(15000)
+        composeTestRule.onNodeWithText("Gasta un total de $expectedPurchaseAmount")
+            .assertExists("No node with this text was found.")
+    }
 }

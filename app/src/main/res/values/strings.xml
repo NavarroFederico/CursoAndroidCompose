@@ -21,9 +21,10 @@
     <string name="app_name">Get max discounts calculator</string>
     <string name="calculate_max_discount">Calculate max discount</string>
     <string name="discount_limit">Discount Limit</string>
-    <string name="maximum_purchase_amount">Maximum purchase amount: %s</string>
+    <string name="to_take_full_advantage_of_the_promotion">To take full advantage of the promotion</string>
+    <string name="spend_a_total_of">Spend a total of %s</string>
     <string name="with_discount_percent">With discount percent: %s </string>
     <string name="and_discount_limit">And discount limit: %s</string>
-    <string name="final_cost">Final Cost: %s</string>
+    <string name="final_cost_with_applied_discount">Final cost with applied discount: %s</string>
     <string name="discount_percent">Discount percent</string>
 </resources>

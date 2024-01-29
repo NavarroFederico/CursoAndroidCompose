@@ -4,6 +4,7 @@ package com.example.cursoandroidcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,7 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -80,22 +84,35 @@ fun TipTimeLayout() {
         )
         EditNumberField(
             label = R.string.discount_limit,
+            leadingIcon = R.drawable.discount_limit_price,
             value = discountLimitInput,
             onValueChange = { discountLimitInput = it },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            ),
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
         )
         EditNumberField(
             label = R.string.discount_percent,
+            leadingIcon = R.drawable.percent_icon,
             value = discountPercentInput,
             onValueChange = { discountPercentInput = it },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
         )
         Text(
-            text = stringResource(id = R.string.maximum_purchase_amount, purchaseLimitString),
+            text = stringResource(id = R.string.to_take_full_advantage_of_the_promotion),
+        )
+        Text(
+            text = stringResource(id = R.string.spend_a_total_of, purchaseLimitString),
             style = MaterialTheme.typography.displaySmall
         )
         Text(
@@ -106,7 +123,7 @@ fun TipTimeLayout() {
                     + "\n" +
                     stringResource(id = R.string.and_discount_limit, discountLimit)
                     + "\n" +
-                    stringResource(id = R.string.final_cost, finalCostString),
+                    stringResource(id = R.string.final_cost_with_applied_discount, finalCostString),
             textAlign = TextAlign.Left,
             modifier = Modifier.align(alignment = Alignment.Start)
         )
@@ -119,6 +136,8 @@ fun TipTimeLayout() {
 @Composable
 fun EditNumberField(
     @StringRes label: Int,
+    @DrawableRes leadingIcon: Int,
+    keyboardOptions: KeyboardOptions,
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier
@@ -128,8 +147,9 @@ fun EditNumberField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(text = stringResource(id = label)) },
+        leadingIcon = { Icon(painter = painterResource(id = leadingIcon), null) },
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        keyboardOptions = keyboardOptions,
         modifier = modifier,
     )
 }
