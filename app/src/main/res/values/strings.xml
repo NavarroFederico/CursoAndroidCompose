@@ -25,4 +25,5 @@
     <string name="with_discount_percent">With discount percent: %s </string>
     <string name="and_discount_limit">And discount limit: %s</string>
     <string name="final_cost">Final Cost: %s</string>
+    <string name="discount_percent">Discount percent</string>
 </resources>

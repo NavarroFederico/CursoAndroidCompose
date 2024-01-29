@@ -4,6 +4,8 @@ package com.example.cursoandroidcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -51,11 +53,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TipTimeLayout() {
-    var amountInput by remember { mutableStateOf("") }
-    val discountLimit = amountInput.toDoubleOrNull() ?: 0.0
-    val discountPercent = 40.0
+    var discountLimitInput by remember { mutableStateOf("") }
+    var discountPercentInput by remember { mutableStateOf("") }
+    val discountLimit = discountLimitInput.toDoubleOrNull() ?: 0.0
+    val discountPercent = discountPercentInput.toDoubleOrNull() ?: 0.0
     val purchaseLimit = calculatePurchaseLimit(discountLimit, discountPercent)
+    val purchaseLimitString = NumberFormat.getCurrencyInstance().format(purchaseLimit)
     val finalCost = calculateCostFinal(purchaseLimit, discountLimit)
+    val finalCostString = NumberFormat.getCurrencyInstance().format(finalCost)
+
     Column(
         modifier = Modifier
             .statusBarsPadding()
@@ -73,14 +79,23 @@ fun TipTimeLayout() {
                 .align(alignment = Alignment.Start)
         )
         EditNumberField(
-            value = amountInput,
-            onValueChange = { amountInput = it },
+            label = R.string.discount_limit,
+            value = discountLimitInput,
+            onValueChange = { discountLimitInput = it },
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth()
+        )
+        EditNumberField(
+            label = R.string.discount_percent,
+            value = discountPercentInput,
+            onValueChange = { discountPercentInput = it },
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
         )
         Text(
-            text = stringResource(id = R.string.maximum_purchase_amount, purchaseLimit),
+            text = stringResource(id = R.string.maximum_purchase_amount, purchaseLimitString),
             style = MaterialTheme.typography.displaySmall
         )
         Text(
@@ -91,7 +106,7 @@ fun TipTimeLayout() {
                     + "\n" +
                     stringResource(id = R.string.and_discount_limit, discountLimit)
                     + "\n" +
-                    stringResource(id = R.string.final_cost, finalCost),
+                    stringResource(id = R.string.final_cost, finalCostString),
             textAlign = TextAlign.Left,
             modifier = Modifier.align(alignment = Alignment.Start)
         )
@@ -102,26 +117,35 @@ fun TipTimeLayout() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditNumberField(value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier) {
+fun EditNumberField(
+    @StringRes label: Int,
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
 
     TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(text = stringResource(id = R.string.discount_limit)) },
+        label = { Text(text = stringResource(id = label)) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         modifier = modifier,
     )
 }
 
-private fun calculatePurchaseLimit(discountLimit: Double, discountPercent: Double = 20.0): String {
+@VisibleForTesting
+internal fun calculatePurchaseLimit(discountLimit: Double, discountPercent: Double): Double {
+
     val purchaseLimit = discountLimit * 100 / discountPercent
-    return NumberFormat.getCurrencyInstance().format(purchaseLimit)
+    return (if (discountPercent != 0.0) purchaseLimit else 0.0)
 }
 
-private fun calculateCostFinal(purchaseLimit: String, discountLimit: Double): String {
-    val finalCost = (purchaseLimit.toDoubleOrNull() ?: 0.0) - discountLimit
-    return NumberFormat.getCurrencyInstance().format(finalCost)
+@VisibleForTesting
+internal fun calculateCostFinal(purchaseLimit: Double, discountLimit: Double): Double {
+
+    val finalCost = purchaseLimit.minus((discountLimit))
+    return if (discountLimit != 0.0) finalCost else 0.0
 }
 
 @Preview(showBackground = true)
