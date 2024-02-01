@@ -51,55 +51,16 @@ fun ArtSpaceApp(modifier: Modifier = Modifier) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+            .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
+
+        ) {
         ArtworkWall(modifier = Modifier.weight(2f))
         Spacer(modifier = Modifier.height(32.dp))
         ArtworkDescriptor(modifier = Modifier.weight(1f))
         Spacer(modifier = Modifier.height(16.dp))
         DisplayController(modifier = Modifier.weight(1f))
-    }
-}
-
-@Composable
-fun DisplayController(modifier: Modifier = Modifier) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-        Button(onClick = { /*TODO*/ }, Modifier.weight(1f)) {
-            Text(text = "Previous")
-        }
-        Spacer(modifier = Modifier.width(32.dp))
-        Button(onClick = { /*TODO*/ }, Modifier.weight(1f)) {
-            Text(text = "Next")
-
-        }
-    }
-}
-
-@Composable
-fun ArtworkDescriptor(modifier: Modifier = Modifier) {
-    Surface(color = Color.LightGray, modifier = modifier
-        .fillMaxWidth()
-        .wrapContentHeight()) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(8.dp)
-        ) {
-            Text(
-                text = "Artwork Title",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 12.dp)
-            )
-            Text(
-                text = "Artwork Artist (Year) ",
-                textAlign = TextAlign.Left,
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
     }
 }
 
@@ -120,6 +81,50 @@ fun ArtworkWall(modifier: Modifier = Modifier) {
         )
     }
 }
+
+@Composable
+fun DisplayController(modifier: Modifier = Modifier) {
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+        Button(onClick = { /*TODO*/ }, Modifier.weight(1f)) {
+            Text(text = "Previous")
+        }
+        Spacer(modifier = Modifier.width(32.dp))
+        Button(onClick = { /*TODO*/ }, Modifier.weight(1f)) {
+            Text(text = "Next")
+
+        }
+    }
+}
+
+@Composable
+fun ArtworkDescriptor(modifier: Modifier = Modifier) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.Bottom) {
+        Surface(
+            color = Color.LightGray, modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(
+                    text = "Artwork Title",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 12.dp)
+                )
+                Text(
+                    text = "Artwork Artist (Year) ",
+                    textAlign = TextAlign.Left,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        }
+    }
+}
+
 
 @Preview(showBackground = true, showSystemUi = false)
 @Composable
