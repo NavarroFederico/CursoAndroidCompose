@@ -7,7 +7,10 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,6 +64,7 @@ class MainActivity : ComponentActivity() {
 fun ArtSpaceApp(modifier: Modifier = Modifier) {
 
     var imageNum by remember { mutableStateOf(1) }
+
 
     when (imageNum) {
         1 -> {
@@ -113,6 +118,8 @@ fun ArtSpaceWallDescriptorDisplayController(
     onStartClickedPreviuos: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isImageExpanded by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
@@ -121,8 +128,11 @@ fun ArtSpaceWallDescriptorDisplayController(
     ) {
         ArtworkWall(
             imageResource = imageResource,
-            modifier = Modifier.weight(2f)
-        )
+            isImageExpanded = isImageExpanded,
+            onStartClicked = { isImageExpanded = !isImageExpanded },
+            modifier = Modifier.weight(2f),
+
+            )
         Spacer(modifier = Modifier.height(32.dp))
         ArtworkDescriptor(
             titleArtwork = titleArtwork,
@@ -141,12 +151,15 @@ fun ArtSpaceWallDescriptorDisplayController(
 @Composable
 fun ArtworkWall(
     @DrawableRes imageResource: Int,
+    isImageExpanded: Boolean,
+    onStartClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Surface(
         shadowElevation = 16.dp,
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable(onClick = onStartClicked),
         color = Color.White
     ) {
         Image(
@@ -154,6 +167,30 @@ fun ArtworkWall(
                 .padding(32.dp),
             painter = painterResource(id = imageResource),
             contentDescription = null
+        )
+    }
+    if (isImageExpanded) {
+        FullscreenImage(imageResource = imageResource, onStartClicked = { onStartClicked.invoke() })
+    }
+}
+
+@Composable
+fun FullscreenImage(
+    @DrawableRes imageResource: Int,
+    onStartClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .clickable(onClick = onStartClicked)
+    ) {
+        Image(
+            painter = painterResource(id = imageResource),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Inside
         )
     }
 }
