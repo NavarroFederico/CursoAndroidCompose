@@ -1,52 +1,30 @@
 package com.example.cursoandroidcompose.practiceKotlinFundamentals.united3
 
 fun main() {
-    val solarSystem =
-        listOf("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
 
-    //.size propiedad para acceder a la cantidad de elementos que tiene una lista
+    //Crea un Set de planetas llamado solarSystem con mutableSetOf(). Esto muestra un MutableSet, cuya implementación predeterminada es LinkedHashSet().
+    val solarSystem =
+        mutableSetOf("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
 
     println(solarSystem.size)
 
-    println(solarSystem[2])
-    println(solarSystem.get(3))
+    solarSystem.add("Pluto")
 
-    //devuelve el index de un elemento que contenga "Earth"
-    println(solarSystem.indexOf("Earth"))
+    println(solarSystem.size)
 
-    //sino se encuentra devuelve -1
-    println(solarSystem.indexOf("Pluto"))
+    println(solarSystem.contains("Pluto"))
 
-    //uso de for
-    println("lista recorrida por un for")
-    for (planet in solarSystem) {
-        println(planet)
-    }
+    println("Pluto" in solarSystem)
 
-    //agregar elementos a una mutablelist
-    val solarSystem1 =
-        mutableListOf("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
-    //.add() " formas de llamar a add()
-    solarSystem1.add("Pluto")
+    //intentando agregar algo que ya existe
+    solarSystem.add("Pluto")
+    println(solarSystem.size)
 
-    solarSystem1.add(3, "Theia")
+    //remove un valor que toma por parametro
+    solarSystem.remove("Pluto")
 
-    //Actualizando valores
-    solarSystem1[3] = "Future Moon"
-
-    println(solarSystem1[3])
-    println(solarSystem1[9])
-
-    //Eliminar elementos
-    solarSystem1.removeAt(9)
-
-    solarSystem1.remove("Future Moon")
-
-    //devuelve booleano si se encuentra elemento en la lista
-    println(solarSystem1.contains("Pluto"))
-
-    //similar a contains operador in
-    println("Future Moon" in solarSystem1)
-
+    //consulta si pluto está
+    println(solarSystem.size)
+    println(solarSystem.contains("Pluto"))
 
 }
