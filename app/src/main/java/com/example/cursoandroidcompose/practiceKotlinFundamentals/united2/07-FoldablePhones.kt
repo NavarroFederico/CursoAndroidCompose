@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose.practiceKotlinFundamentals
+package com.example.cursoandroidcompose.practiceKotlinFundamentals.united2
 
 open class Phone(var isScreenLightOn: Boolean = false) {
     open fun switchOn() {
