@@ -29,8 +29,11 @@ fun main() {
        para encontrar un promedio..*/
 
 
-    val totalPrice = cookies.fold(0.0) { total, cookie ->
-        total + cookie.price
+    val alphabeticalMenu = cookies.sortedBy {
+        it.name
     }
-    println("Total price: $${totalPrice}")
+    println("Alphabetical menu:")
+    alphabeticalMenu.forEach {
+        println(it.name)
+    }
 }
