@@ -24,17 +24,16 @@ val cookies = listOf(
 
 fun main() {
     /*
-        La función map() te permite transformar una colección en otra nueva con la misma cantidad
-        de elementos.Por ejemplo : map () podría transformar una List<Cookie> en una List < String >
-        que solo contenga el name de la galleta, siempre que le indiques a la función map()
-        cómo crear una String de cada elemento Cookie.*/
+       La función filter() te permite crear un subconjunto de una colección.
+       Por ejemplo, si tuvieras una lista de números, podrías usar filter()
+       para crear una lista nueva que solo contenga números divisibles por 2.
+.*/
 
-    val fullMenu = cookies.map {
-        "${it.name} - $${it.price}"
+    val softBakedMenu = cookies.filter {
+        it.softBaked
     }
-
-    println("Full menú")
-    fullMenu.forEach {
-        println("${it}")
+    println("Soft cookies:")
+    softBakedMenu.forEach {
+        println("${it.name} - $${it.price}")
     }
 }
