@@ -1,39 +1,52 @@
 package com.example.cursoandroidcompose.practiceKotlinFundamentals.united3
 
 fun main() {
-    val rockPlanets = arrayOf<String>("Mercury", "Venus", "Earth", "Mars")
+    val solarSystem =
+        listOf("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
 
-    val gasPlanets = arrayOf("Jupiter", "Saturn", "Uranus", "Neptune")
+    //.size propiedad para acceder a la cantidad de elementos que tiene una lista
 
-    val solarSystem = rockPlanets + gasPlanets
+    println(solarSystem.size)
 
-    println(solarSystem[0])
-    println(solarSystem[1])
     println(solarSystem[2])
-    println(solarSystem[3])
-    println(solarSystem[4])
-    println(solarSystem[5])
-    println(solarSystem[6])
-    println(solarSystem[7])
+    println(solarSystem.get(3))
 
-    solarSystem[3] = "Little Earth"
-    println(solarSystem[3])
+    //devuelve el index de un elemento que contenga "Earth"
+    println(solarSystem.indexOf("Earth"))
 
-    //Los arrays tienen un tamaño fijo. Una vez creados no se pueden agregar elementos nuevos.
-    //solarSystem[8] = "Pluto" //corre una
-    //Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 8
+    //sino se encuentra devuelve -1
+    println(solarSystem.indexOf("Pluto"))
 
-    val newSolarSystem = arrayOf(
-        "Mercury",
-        "Venus",
-        "Earth",
-        "Mars",
-        "Jupiter",
-        "Saturn",
-        "Uranus",
-        "Neptune",
-        "Pluto"
-    )
-    println(newSolarSystem[8])
+    //uso de for
+    println("lista recorrida por un for")
+    for (planet in solarSystem) {
+        println(planet)
+    }
+
+    //agregar elementos a una mutablelist
+    val solarSystem1 =
+        mutableListOf("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
+    //.add() " formas de llamar a add()
+    solarSystem1.add("Pluto")
+
+    solarSystem1.add(3, "Theia")
+
+    //Actualizando valores
+    solarSystem1[3] = "Future Moon"
+
+    println(solarSystem1[3])
+    println(solarSystem1[9])
+
+    //Eliminar elementos
+    solarSystem1.removeAt(9)
+
+    solarSystem1.remove("Future Moon")
+
+    //devuelve booleano si se encuentra elemento en la lista
+    println(solarSystem1.contains("Pluto"))
+
+    //similar a contains operador in
+    println("Future Moon" in solarSystem1)
+
 
 }
