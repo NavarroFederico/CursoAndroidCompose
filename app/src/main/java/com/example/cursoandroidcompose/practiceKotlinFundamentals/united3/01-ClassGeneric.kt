@@ -1,23 +1,5 @@
 package com.example.cursoandroidcompose.practiceKotlinFundamentals.united3
 
-class FillInTheBlankQuestion(
-    val questionText: String,
-    val answer: String,
-    val difficulty: String
-)
-
-class TrueOrFalseQuestion(
-    val questionText: String,
-    val answer: Boolean,
-    val difficulty: String
-)
-
-class NumericQuestion(
-    val questionText: String,
-    val answer: Int,
-    val difficulty: String
-)
-
 data class Question<T>(
     val questionText: String,
     val answer: T,
@@ -28,7 +10,12 @@ enum class Difficulty {
     EASY, MEDIUM, HARD
 }
 
-class Quiz {
+interface ProgressPrintable {
+    val progressText: String
+    fun printProgressBar()
+}
+
+class Quiz : ProgressPrintable {
     val question1 = Question<String>("Quoth the raven ___", "nevermore", Difficulty.MEDIUM)
     val question2 = Question<Boolean>("The sky is green. True or false", false, Difficulty.EASY)
     val question3 =
@@ -39,23 +26,24 @@ class Quiz {
         var answered: Int = 6
 
     }
-}
 
-//las propiedades de extension no pueden almacenar datos, por lo que deben ser de solo acceso
-val Quiz.StudentProgress.progressText: String
-    get() = "${answered} of ${total} answered"
+    override val progressText: String
+        get() = "${answered} of ${total} answered"
 
-
-fun Quiz.StudentProgress.printProgressBar() {
-    repeat(Quiz.answered) { print("▓") }
-    repeat(Quiz.total - Quiz.answered) { print("▒") }
-    println()
-    println(Quiz.progressText)
+    override fun printProgressBar() {
+        repeat(Quiz.answered) { print("▓") }
+        repeat(Quiz.total - Quiz.answered) { print("▒") }
+        println()
+        println(progressText)
+    }
 }
 
 fun main() {
 
-    Quiz.printProgressBar()
+    val quiz = Quiz()
+    quiz.printProgressBar()
+
+    Quiz().printProgressBar()
 
 
 }
