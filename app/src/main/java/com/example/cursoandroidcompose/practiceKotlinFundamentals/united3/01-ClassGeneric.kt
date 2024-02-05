@@ -39,18 +39,22 @@ class Quiz {
         var answered: Int = 3
     }
 }
-
+//las propiedades de extension no pueden almacenar datos, por lo que deben ser de solo acceso
+val Quiz.StudentProgress.progressText: String
+    get() = "${answered} of ${total} answered"
 
 fun main() {
 
-    val question1 = Question<String>("Quoth the raven ___", "nevermore", Difficulty.MEDIUM)
-    val question2 = Question<Boolean>("The sky is green. True or false", false, Difficulty.EASY)
-    val question3 =
-        Question<Int>("How many days are there between full moons?", 28, Difficulty.HARD)
+    /*    val question1 = Question<String>("Quoth the raven ___", "nevermore", Difficulty.MEDIUM)
+        val question2 = Question<Boolean>("The sky is green. True or false", false, Difficulty.EASY)
+        val question3 =
+            Question<Int>("How many days are there between full moons?", 28, Difficulty.HARD)
 
-    println(question1.toString())
-    println(question2.toString())
-    println(question3.toString())
+        println(question1.toString())
+        println(question2.toString())
+        println(question3.toString())
+        */
+    println(Quiz.progressText)
 
-    println("${Quiz.answered} of ${Quiz.total} answered.")
+
 }
