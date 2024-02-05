@@ -24,28 +24,13 @@ val cookies = listOf(
 
 fun main() {
     /*
-       La función groupBy() se puede usar para convertir una lista en un mapa con base en una función.
-        Cada valor único que se muestra de la función se convierte en una clave en el mapa resultante.
-        Los valores de cada clave son todos los elementos de la colección que produjeron ese valor único.
-.*/
+      La función fold() se usa para generar un valor único a partir de una colección.
+      Por lo general, se usa para calcular un total de precios o sumar todos los elementos de una lista
+       para encontrar un promedio..*/
 
-    val groupedMenu = cookies.groupBy { it.softBaked }
 
-    /*Crea una variable softBakedMenu que contenga el valor de groupedMenu[true] y
-    una variable crunchyMenu que contenga el valor de groupedMenu[false].
-    Como el resultado de suscribir un elemento Map puede ser nulo, puedes usar el operador Elvis (?:)
-    para mostrar una lista vacía.*/
-
-    val softBakedMenu = groupedMenu[true] ?: listOf()
-    val crunchyMenu = groupedMenu[false] ?: listOf()
-
-    println("Soft cookies:")
-    softBakedMenu.forEach {
-        println("${it.name} - $${it.price}")
+    val totalPrice = cookies.fold(0.0) { total, cookie ->
+        total + cookie.price
     }
-    println()
-    println("Crunchy cookies:")
-    crunchyMenu.forEach {
-        println("${it.name} - $${it.price}")
-    }
+    println("Total price: $${totalPrice}")
 }
