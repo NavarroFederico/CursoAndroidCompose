@@ -47,19 +47,8 @@ fun main() {
             durationInMinutes = 45
         )
     )
-//Asi lo resolví yo
-    val groupedByDaypart = events.groupBy { it.daypart }
-    val morning = groupedByDaypart[Daypart.MORNING] ?: listOf()
-    val afternoon = groupedByDaypart[Daypart.AFTERNOON] ?: listOf()
-    val evening = groupedByDaypart[Daypart.EVENING] ?: listOf()
 
-    println("Morning: ${morning.size} events")
-    println("Afternoon: ${afternoon.size} events")
-    println("Evening: ${evening.size} events")
+//Mostrar el último elemento de la lista events
 
-//Solucion propuesta
-    val groupedEvents = events.groupBy { it.daypart }
-    groupedEvents.forEach { (daypart, events) ->
-        println("$daypart: ${events.size} events")
-    }
+    println("Last event of the day: ${events.last().title}")
 }
