@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CursoAndroidCompose"
 include(":app")
+include(":affirmations")
