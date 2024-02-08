@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/affirmations" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/coursesapp" />
+            <option value="$PROJECT_DIR$/woofapp" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

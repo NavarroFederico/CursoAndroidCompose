@@ -17,3 +17,4 @@ rootProject.name = "CursoAndroidCompose"
 include(":app")
 include(":affirmations")
 include(":coursesapp")
+include(":woofapp")
