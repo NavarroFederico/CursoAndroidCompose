@@ -9,24 +9,36 @@ import androidx.compose.ui.unit.sp
 import com.example.superhero.R
 
 // Set of Material typography styles to start with
-val Cabin = FontFamily(Font(R.font.cabin))
-val CabinBold = FontFamily(Font(R.font.cabin_bold))
+val Cabin = FontFamily(
+    Font(R.font.cabin_regular, FontWeight.Normal),
+    Font(R.font.cabin_bold, FontWeight.Bold)
+)
 
+// Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = Cabin,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
+        fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     ),
-    displayMedium = TextStyle(
-        fontFamily = CabinBold,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+    displayLarge = TextStyle(
+        fontFamily = Cabin,
+        fontWeight = FontWeight.Normal,
+        fontSize = 30.sp
     ),
-
-
+    displayMedium = TextStyle(
+        fontFamily = Cabin,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp
+    ),
+    displaySmall = TextStyle(
+        fontFamily = Cabin,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp
+    )
+)
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -43,4 +55,3 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
-)
