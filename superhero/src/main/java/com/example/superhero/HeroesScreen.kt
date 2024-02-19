@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -34,25 +35,25 @@ import com.example.superhero.ui.theme.SuperheroesTheme
 
 @Composable
 fun HeroesList(
-    heroes: List<Hero>,
+    heroes: List<Hero>, contentPadding: PaddingValues = PaddingValues(0.dp),
     modifier: Modifier = Modifier,
-){
-    LazyColumn{
-        items(heroes){ hero->
-HeroListItem(hero = hero,
-    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
-
-
+) {
+    LazyColumn(contentPadding = contentPadding,) {
+        items(heroes) { hero ->
+            HeroListItem(
+                hero = hero, modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
         }
     }
 }
+
 @Composable
 fun HeroListItem(
     hero: Hero,
     modifier: Modifier = Modifier
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = 20.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp), modifier = modifier
 
     ) {
         Row(
@@ -62,7 +63,7 @@ fun HeroListItem(
                 .heightIn(min = 72.dp)
         )
         {
-            HeroInformation(hero.nameRes, hero.descriptionRes,modifier.weight(1f) )
+            HeroInformation(hero.nameRes, hero.descriptionRes, modifier.weight(1f))
             Spacer(modifier = Modifier.width(16.dp))
             HeroIcon(hero.imageRes, hero.nameRes)
         }
@@ -86,9 +87,11 @@ fun HeroInformation(
 
 @Composable
 fun HeroIcon(@DrawableRes imageRes: Int, @StringRes stringRes: Int, modifier: Modifier = Modifier) {
-    Box(modifier = Modifier
-        .height(72.dp)
-        .aspectRatio(ratio = 1.0f)) {
+    Box(
+        modifier = Modifier
+            .height(72.dp)
+            .aspectRatio(ratio = 1.0f)
+    ) {
         Image(
             painter = painterResource(id = imageRes),
             contentDescription = stringResource(stringRes),
@@ -101,7 +104,7 @@ fun HeroIcon(@DrawableRes imageRes: Int, @StringRes stringRes: Int, modifier: Mo
 
 @Preview(showBackground = false, showSystemUi = true)
 @Composable
-fun SuperHeroesScreenPreview() {
+fun HeroesItemPreview() {
     SuperheroesTheme {
         HeroListItem(
             hero = HeroesRepository.heroes[3],
@@ -111,8 +114,8 @@ fun SuperHeroesScreenPreview() {
 
 @Preview(showBackground = false, showSystemUi = true)
 @Composable
-fun SuperHeroeScreenPreview() {
+fun HeroListItemPreview() {
     SuperheroesTheme {
-      HeroesList(heroes = HeroesRepository.heroes)
+        HeroesList(heroes = HeroesRepository.heroes)
     }
 }
