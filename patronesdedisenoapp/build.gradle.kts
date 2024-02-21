@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cursoandroidcompose"
+    namespace = "com.example.patronesdedisenoapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.cursoandroidcompose"
+        applicationId = "com.example.patronesdedisenoapp"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
