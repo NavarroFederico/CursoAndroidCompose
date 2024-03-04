@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -35,14 +36,13 @@ import com.example.superhero.ui.theme.SuperheroesTheme
 @Composable
 fun HeroesList(
     heroes: List<Hero>,
+    contentPadding: PaddingValues = PaddingValues(),
     modifier: Modifier = Modifier,
 ){
     LazyColumn{
         items(heroes){ hero->
 HeroListItem(hero = hero,
     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp))
-
-
         }
     }
 }
