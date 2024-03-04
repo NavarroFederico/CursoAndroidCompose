@@ -3,12 +3,17 @@ package com.example.superhero
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,6 +23,7 @@ import com.example.superhero.ui.theme.SuperheroesTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContent {
             SuperheroesTheme {
@@ -26,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SuperheroeApp()
+                    SuperheroesApp()
                 }
             }
         }
@@ -36,18 +42,29 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SuperheroTopAppBar(modifier: Modifier = Modifier) {
-    CenterAlignedTopAppBar(title = { stringResource(id = R.string.app_name) }, modifier = modifier)
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = stringResource(id = R.string.app_name),
+                style = MaterialTheme.typography.displayLarge
+            )
+        },
+        /*colors = TopAppBarDefaults.topAppBarColors(
+            titleContentColor = MaterialTheme.colorScheme.primaryContainer,
+            containerColor = MaterialTheme.colorScheme.primary
+        ),*/
+        modifier = modifier
+    )
 }
 
 @Composable
-fun SuperheroeApp() {
+fun SuperheroesApp(modifier: Modifier = Modifier) {
     Scaffold(
-        topBar = {
-            SuperheroTopAppBar()
-        }
-    ) { it ->
-        HeroesList(heroes = HeroesRepository.heroes, contentPadding = it)
-
+        modifier = Modifier.fillMaxSize(),
+        topBar = { SuperheroTopAppBar() }
+    ) {
+        val heroesList = HeroesRepository.heroes
+        HeroesList(heroes = heroesList, contentPadding = it)
 
     }
 }
@@ -56,8 +73,6 @@ fun SuperheroeApp() {
 @Composable
 fun GreetingPreview() {
     SuperheroesTheme {
-        HeroListItem(
-            hero = HeroesRepository.heroes[3],
-        )
+        SuperheroesApp()
     }
 }
