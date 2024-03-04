@@ -99,5 +99,28 @@ datos que se utilizará para ejecutarlo. De esta forma se
 necesidad de modificarlas.
 pueden añadir nuevas operaciones a estas estructuras sin
 </string>
+    <string name="url_abstract_factory">https://devexpert.io/abstract-factory/</string>
+    <string name="https_devexpert_io_factory_method">factory_method_url</string>
+    <string name="builder_url">https://devexpert.io/builder-patrones-diseno/</string>
+    <string name="singleton_url">https://devexpert.io/singleton-patrones-diseno/</string>
+    <string name="prototype_url">https://devexpert.io/prototype-patrones-diseno/</string>
+    <string name="adapter_url">https://devexpert.io/adapter-patrones-diseno/</string>
+    <string name="bridge_url">https://devexpert.io/bridge-patrones-diseno/</string>
+    <string name="composite_url">https://devexpert.io/composite-patrones-diseno/</string>
+    <string name="decorator_url">https://devexpert.io/decorator-patrones-diseno/</string>
+    <string name="facade_url">https://devexpert.io/facade-patrones-diseno/</string>
+    <string name="flyweight_url">https://devexpert.io/flyweight-patrones-diseno/</string>
+    <string name="proxy_url">https://devexpert.io/proxy-patrones-diseno/</string>
+    <string name="command_url">https://devexpert.io/command-patrones-diseno/</string>
+    <string name="chain_of_responsibility_url">https://devexpert.io/chain-of-responsibility/</string>
+    <string name="interpreter_url">https://devexpert.io/interpreter-patrones-diseno/</string>
+    <string name="iterator_url">https://devexpert.io/iterator-patrones-diseno/</string>
+    <string name="memento_url">https://devexpert.io/memento-patrones-diseno/</string>
+    <string name="observer_url">https://devexpert.io/observer-patrones-diseno/</string>
+    <string name="state_url">https://devexpert.io/state-patrones-diseno/</string>
+    <string name="strategy_url">https://devexpert.io/strategy-patrones-diseno/</string>
+    <string name="template_method_url">https://devexpert.io/template-method/</string>
+    <string name="visitor_url">https://devexpert.io/visitor-patrones-diseno/</string>
+    <string name="mediator_url">https://devexpert.io/mediator-patrones-diseno/</string>
 
 </resources>

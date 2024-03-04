@@ -9,6 +9,6 @@ data class PatternDesign(
     @StringRes val descriptionRes: Int,
     @DrawableRes val imageRes: Int,
     val patternType: PatternType,
-    val url: String = "",
+    @StringRes val url: Int,
 
 )
