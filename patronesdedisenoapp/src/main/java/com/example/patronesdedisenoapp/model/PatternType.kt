@@ -1,5 +1,14 @@
 package com.example.patronesdedisenoapp.model
 
-enum class PatternType {
-    CREATIONAL,STRUCTURAL, BEHAVIORAL
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
+import com.example.patronesdedisenoapp.ui.theme.TypePatternBehavioral
+import com.example.patronesdedisenoapp.ui.theme.TypePatternCreational
+import com.example.patronesdedisenoapp.ui.theme.TypePatternStructural
+
+
+enum class PatternType(val color: Color) {
+    CREATIONAL(color = TypePatternCreational), STRUCTURAL(color = TypePatternStructural), BEHAVIORAL(
+        color = TypePatternBehavioral
+    )
 }
