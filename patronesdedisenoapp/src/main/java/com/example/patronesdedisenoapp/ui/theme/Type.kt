@@ -34,6 +34,7 @@ val Typography = Typography(
     labelMedium = TextStyle(
         fontFamily = MontserratAlternates,
         fontWeight = FontWeight.SemiBold,
+        fontStyle = FontStyle.Italic,
         fontSize = 14.sp
     ),
     labelSmall = TextStyle(

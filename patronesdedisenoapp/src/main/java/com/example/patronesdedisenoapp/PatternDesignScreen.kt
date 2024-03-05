@@ -93,7 +93,10 @@ fun PatternInformation(
 
     Row {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = stringResource(id = nameRes), style = MaterialTheme.typography.displayMedium)
+            Text(
+                text = stringResource(id = nameRes),
+                style = MaterialTheme.typography.displayMedium
+            )
             Text(
                 buildAnnotatedString {
                     withStyle(
@@ -103,9 +106,12 @@ fun PatternInformation(
                         append("Tipo de patrón: ")
                     }
                     withStyle(
-                        style =  customSpanStyle(MaterialTheme.typography.labelMedium, color = colorType)
+                        style = customSpanStyle(
+                            MaterialTheme.typography.labelMedium,
+                            color = colorType
                         )
-                     {
+                    )
+                    {
                         append(type.name)
                     }
                 }
