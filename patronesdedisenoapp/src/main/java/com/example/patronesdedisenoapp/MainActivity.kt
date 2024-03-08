@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                        val patternDesign = PatternsDesignRepository.patterns[2]
+                        val patternDesign = PatternsDesignRepository.patterns[10]
                         PatternDesignItem(patternDesign = patternDesign)
 
                 }

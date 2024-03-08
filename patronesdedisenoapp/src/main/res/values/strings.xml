@@ -100,7 +100,7 @@ necesidad de modificarlas.
 pueden añadir nuevas operaciones a estas estructuras sin
 </string>
     <string name="url_abstract_factory">https://devexpert.io/abstract-factory/</string>
-    <string name="https_devexpert_io_factory_method">factory_method_url</string>
+    <string name="https_devexpert_io_factory_method">https://devexpert.io/factory_method_url</string>
     <string name="builder_url">https://devexpert.io/builder-patrones-diseno/</string>
     <string name="singleton_url">https://devexpert.io/singleton-patrones-diseno/</string>
     <string name="prototype_url">https://devexpert.io/prototype-patrones-diseno/</string>
@@ -122,5 +122,12 @@ pueden añadir nuevas operaciones a estas estructuras sin
     <string name="template_method_url">https://devexpert.io/template-method/</string>
     <string name="visitor_url">https://devexpert.io/visitor-patrones-diseno/</string>
     <string name="mediator_url">https://devexpert.io/mediator-patrones-diseno/</string>
+
+
+    <string name="type_creational">Creacional</string>
+    <string name="type_behaviorial">Comportamiento</string>
+    <string name="type_structural">Estructural</string>
+    <string name="para_m_s_info_click">"Para más info click "</string>
+    <string name="aqui">aquí</string>
 
 </resources>

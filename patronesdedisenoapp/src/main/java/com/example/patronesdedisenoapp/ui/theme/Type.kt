@@ -1,6 +1,7 @@
 package com.example.patronesdedisenoapp.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -46,7 +47,8 @@ val Typography = Typography(
     bodyMedium = TextStyle(
         fontFamily = MontserratAlternates,
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontSize = 14.sp,
+
     ),
     bodySmall = TextStyle(
         fontFamily = MontserratAlternates,
