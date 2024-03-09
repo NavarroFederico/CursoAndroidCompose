@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.a00_basicslayout.screens.ComposeQuadrantScreen
+import com.example.a00_basicslayout.screens.BusinessCardApp
 import com.example.a00_basicslayout.ui.theme.CursoAndroidComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,8 @@ class MainActivity : ComponentActivity() {
 //                    BirthCardApp("Happy Birthday Sam!", "From Emma")
 //                    ComposeArticleScreen()
 //                    TaskCompletedScreen()
-                    ComposeQuadrantScreen()
+//                    ComposeQuadrantScreen()
+                    BusinessCardApp(modifier = Modifier.fillMaxSize())
                 }
             }
         }
