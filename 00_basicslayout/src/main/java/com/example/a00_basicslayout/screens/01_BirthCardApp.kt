@@ -21,9 +21,9 @@ import com.example.a00_basicslayout.R
 import com.example.a00_basicslayout.ui.theme.CursoAndroidComposeTheme
 
 @Composable
-fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
+fun BirthCardApp(message: String, from: String, modifier: Modifier = Modifier) {
     val image = painterResource(id = R.drawable.androidparty)
-    Box {
+    Box(modifier = modifier) {
         Image(
             painter = image,
             contentDescription = null,
@@ -67,6 +67,6 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 @Composable
 fun BirthdayCardPreview2() {
     CursoAndroidComposeTheme {
-        GreetingImage("Happy Birthday Sam!", "From Emma")
+        BirthCardApp("Happy Birthday Sam!", "From Emma")
     }
 }
