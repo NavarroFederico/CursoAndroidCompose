@@ -4,25 +4,28 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,214 +34,229 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.cursoandroidcompose.ui.theme.LemonadeTheme
-
+import com.example.cursoandroidcompose.ui.theme.ArtSpaceTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            LemonadeTheme {
-                LemonAppV1()
-            }
-        }
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LemonAppV1() {
-    var currentStep by remember { mutableStateOf(1) }
-    var tapCount by remember { mutableStateOf(0) }
-
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.app_name),
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-
-                    )
-            )
-        },
-        contentColor = MaterialTheme.colorScheme.primaryContainer
-    ) { innerPadding ->
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            when (currentStep) {
-                1 -> LemonTextAndImage(
-                    idText = R.string.Tap_the_lemon_tree_to_select_a_lemon,
-                    idImageResource = R.drawable.lemon_tree,
-                    idContentDescription = R.string.lemon_tree_content_description,
-                    onStartClicked = {
-                        tapCount = (2..4).random()
-                        currentStep = 2
-                        Log.d("Log", "$tapCount ")
-
-                    }
-                )
-
-                2 -> LemonTextAndImage(
-                    idText = R.string.Keep_tapping_the_lemon_to_squeeze_it,
-                    idImageResource = R.drawable.lemon_squeeze,
-                    idContentDescription = R.string.lemon_content_description
+            ArtSpaceTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
                 ) {
-                    tapCount--
-                    if (tapCount == 0) currentStep = 3
-                    Log.d("Log", "$tapCount ")
-
+                    ArtSpaceApp()
                 }
-
-                3 -> LemonTextAndImage(
-                    idText = R.string.Tap_the_lemonade_to_drink_it,
-                    idImageResource = R.drawable.lemon_drink,
-                    idContentDescription = R.string.glass_of_lemonade_content_description,
-                    onStartClicked = { currentStep = 4 })
-
-                4 -> LemonTextAndImage(
-                    idText = R.string.Tap_the_empty_glass_to_start_again,
-                    idImageResource = R.drawable.lemon_restart,
-                    idContentDescription = R.string.empty_glass_content_description,
-                    onStartClicked = { currentStep = 1 })
             }
+        }
+    }
+}
+
+@Composable
+fun ArtSpaceApp(modifier: Modifier = Modifier) {
+
+    var imageNum by remember { mutableStateOf(1) }
 
 
+    when (imageNum) {
+        1 -> {
+            ArtSpaceWallDescriptorDisplayController(
+                imageResource = R.drawable.camioneta_roja,
+                titleArtwork = R.string.red_truck_by_the_post,
+                descriptionArtwork = R.string.red_truck_description,
+                onStartClickedNext = { imageNum++ },
+                onStartClickedPreviuos = { imageNum = 4 }
+            )
         }
 
-    }
+        2 -> {
+            ArtSpaceWallDescriptorDisplayController(
+                imageResource = R.drawable.chevrolet_blanco_y_negro,
+                titleArtwork = R.string.autumn_landscape,
+                descriptionArtwork = R.string.autumn_landscape_description,
+                onStartClickedNext = { imageNum++ },
+                onStartClickedPreviuos = { imageNum-- }
+            )
+        }
 
+        3 -> {
+            ArtSpaceWallDescriptorDisplayController(
+                imageResource = R.drawable.auto_deportivo_blanco_y_negro,
+                titleArtwork = R.string.sportiness_in_motion,
+                descriptionArtwork = R.string.sportiness_description,
+                onStartClickedNext = { imageNum++ },
+                onStartClickedPreviuos = { imageNum-- }
+            )
+        }
+
+        4 -> {
+            ArtSpaceWallDescriptorDisplayController(
+                imageResource = R.drawable.guerrero_bohemio,
+                titleArtwork = R.string.the_bohemian_warrior,
+                descriptionArtwork = R.string.the_bohemian_warrior_description,
+                onStartClickedNext = { imageNum = 1 },
+                onStartClickedPreviuos = { imageNum-- }
+            )
+        }
+    }
+}
+
+@Composable
+fun ArtSpaceWallDescriptorDisplayController(
+    @DrawableRes imageResource: Int,
+    @StringRes titleArtwork: Int,
+    @StringRes descriptionArtwork: Int,
+    onStartClickedNext: () -> Unit,
+    onStartClickedPreviuos: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    var isImageExpanded by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        ArtworkWall(
+            imageResource = imageResource,
+            isImageExpanded = isImageExpanded,
+            onStartClicked = { isImageExpanded = !isImageExpanded },
+            modifier = Modifier.weight(2f),
+
+            )
+        Spacer(modifier = Modifier.height(32.dp))
+        ArtworkDescriptor(
+            titleArtwork = titleArtwork,
+            descriptionArtwork = descriptionArtwork, modifier = Modifier.weight(1f)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        DisplayController(
+            onStartClickedPreviuos = onStartClickedPreviuos,
+            onStartClickedNext = onStartClickedNext,
+            modifier = Modifier.weight(1f)
+        )
+    }
 
 }
 
 @Composable
-fun LemonTextAndImage(
-    idText: Int,
-    idImageResource: Int,
-    idContentDescription: Int,
-    onStartClicked: () -> Unit
+fun ArtworkWall(
+    @DrawableRes imageResource: Int,
+    isImageExpanded: Boolean,
+    onStartClicked: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Surface(
+        shadowElevation = 16.dp,
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(onClick = onStartClicked),
+        color = Color.White
     ) {
         Image(
-            painter = painterResource(id = idImageResource),
-            contentDescription = stringResource(id = idContentDescription),
-            modifier = Modifier
-                .wrapContentSize()
-                .border(
-                    width = 2.dp,
-                    color = Color(105, 205, 216),
-                    shape = RoundedCornerShape(20.dp)
-                )
-                .background(color = Color(195, 236, 210), shape = RoundedCornerShape(20.dp))
-                .clickable(onClickLabel = "Click Image", onClick = onStartClicked)
+            modifier = modifier
+                .padding(32.dp),
+            painter = painterResource(id = imageResource),
+            contentDescription = null
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = stringResource(id = idText),
-            fontSize = 18.sp,
-        )
+    }
+    if (isImageExpanded) {
+        FullscreenImage(imageResource = imageResource, onStartClicked = { onStartClicked.invoke() })
     }
 }
 
 @Composable
-fun LemonAppV2() {
-    var currentStep by remember { mutableStateOf(1) }
-    val imageResource = when (currentStep) {
-        1 -> R.drawable.lemon_tree
-        2 -> R.drawable.lemon_squeeze
-        3 -> R.drawable.lemon_drink
-        else -> R.drawable.lemon_restart
-    }
-
-    val contentDescription = when (currentStep) {
-        1 -> stringResource(id = R.string.lemon_tree_content_description)
-        2 -> stringResource(id = R.string.lemon_content_description)
-        3 -> stringResource(id = R.string.glass_of_lemonade_content_description)
-        else -> stringResource(id = R.string.empty_glass_content_description)
-    }
-
-    val textDescription = when (currentStep) {
-        1 -> stringResource(id = R.string.Tap_the_lemon_tree_to_select_a_lemon)
-        2 -> stringResource(id = R.string.Keep_tapping_the_lemon_to_squeeze_it)
-        3 -> stringResource(id = R.string.Tap_the_lemonade_to_drink_it)
-        else -> {
-            stringResource(id = R.string.Tap_the_empty_glass_to_start_again)
-        }
-    }
-
-    // A surface container using the 'background' color from the theme
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+fun FullscreenImage(
+    @DrawableRes imageResource: Int,
+    onStartClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .clickable(onClick = onStartClicked)
     ) {
-        Column(
+        Image(
+            painter = painterResource(id = imageResource),
+            contentDescription = null,
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            contentScale = ContentScale.Inside
+        )
+    }
+}
+
+@Composable
+fun ArtworkDescriptor(
+    @StringRes titleArtwork: Int,
+    @StringRes descriptionArtwork: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier, verticalArrangement = Arrangement.Bottom) {
+        Surface(
+            color = Color.LightGray, modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .verticalScroll(rememberScrollState())
         ) {
-            Image(
-                painter = painterResource(imageResource),
-                contentDescription = contentDescription,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .border(
-                        width = 2.dp,
-                        color = Color(105, 205, 216),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .background(color = Color(105, 205, 216), shape = RoundedCornerShape(20.dp))
-                    .clickable(onClickLabel = "Click Image", onClick = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text(
+                    text = stringResource(id = titleArtwork),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 12.dp)
+                )
+                Text(
+                    text = stringResource(id = descriptionArtwork),
+                    textAlign = TextAlign.Left,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+        }
+    }
+}
 
-                        when (currentStep) {
-                            1 -> currentStep = 2
-                            2 -> currentStep = 3
-                            3 -> currentStep = 4
-                            4 -> currentStep = 1
-
-                        }
-                    })
-
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = textDescription,
-                fontSize = 18.sp,
-            )
-
+@Composable
+fun DisplayController(
+    onStartClickedPreviuos: () -> Unit,
+    onStartClickedNext: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+        Button(onClick = {
+            onStartClickedPreviuos.invoke()
+            Log.d("", "hice click previous")
+        }, Modifier.weight(1f)) {
+            Text(text = "Previous")
+        }
+        Spacer(modifier = Modifier.width(32.dp))
+        Button(onClick = {
+            onStartClickedNext.invoke()
+            Log.d("", "hice click next")
+        }, Modifier.weight(1f)) {
+            Text(text = "Next")
 
         }
-
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = false)
 @Composable
-fun DefaultPreview() {
-    LemonadeTheme {
-        LemonAppV1()
+fun ArtSpacePreview() {
+    ArtSpaceTheme {
+        ArtSpaceApp()
     }
 }
-
