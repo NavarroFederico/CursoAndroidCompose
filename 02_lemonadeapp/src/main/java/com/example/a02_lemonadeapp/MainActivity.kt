@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose
+package com.example.a02_lemonadeapp
 
 import android.os.Bundle
 import android.util.Log
@@ -37,8 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cursoandroidcompose.ui.theme.LemonadeTheme
-
+import com.example.a02_lemonadeapp.ui.theme.LemonadeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +49,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -236,9 +234,8 @@ fun LemonAppV2() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun LemonadeAppPreview() {
     LemonadeTheme {
         LemonAppV1()
     }
 }
-

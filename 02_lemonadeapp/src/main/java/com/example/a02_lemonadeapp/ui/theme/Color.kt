@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose.ui.theme
+package com.example.a02_lemonadeapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
