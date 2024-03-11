@@ -1,31 +1,29 @@
 package com.example.cursoandroidcompose
 
+
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,27 +31,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.cursoandroidcompose.ui.theme.ArtSpaceTheme
+import com.example.cursoandroidcompose.ui.theme.TipCalculatorTheme
+import java.text.NumberFormat
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ArtSpaceTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    ArtSpaceApp()
+            TipCalculatorTheme {
+                Surface {
+                    TipTimeLayout()
                 }
             }
         }
@@ -61,202 +56,123 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ArtSpaceApp(modifier: Modifier = Modifier) {
-
-    var imageNum by remember { mutableStateOf(1) }
-
-
-    when (imageNum) {
-        1 -> {
-            ArtSpaceWallDescriptorDisplayController(
-                imageResource = R.drawable.camioneta_roja,
-                titleArtwork = R.string.red_truck_by_the_post,
-                descriptionArtwork = R.string.red_truck_description,
-                onStartClickedNext = { imageNum++ },
-                onStartClickedPreviuos = { imageNum = 4 }
-            )
-        }
-
-        2 -> {
-            ArtSpaceWallDescriptorDisplayController(
-                imageResource = R.drawable.chevrolet_blanco_y_negro,
-                titleArtwork = R.string.autumn_landscape,
-                descriptionArtwork = R.string.autumn_landscape_description,
-                onStartClickedNext = { imageNum++ },
-                onStartClickedPreviuos = { imageNum-- }
-            )
-        }
-
-        3 -> {
-            ArtSpaceWallDescriptorDisplayController(
-                imageResource = R.drawable.auto_deportivo_blanco_y_negro,
-                titleArtwork = R.string.sportiness_in_motion,
-                descriptionArtwork = R.string.sportiness_description,
-                onStartClickedNext = { imageNum++ },
-                onStartClickedPreviuos = { imageNum-- }
-            )
-        }
-
-        4 -> {
-            ArtSpaceWallDescriptorDisplayController(
-                imageResource = R.drawable.guerrero_bohemio,
-                titleArtwork = R.string.the_bohemian_warrior,
-                descriptionArtwork = R.string.the_bohemian_warrior_description,
-                onStartClickedNext = { imageNum = 1 },
-                onStartClickedPreviuos = { imageNum-- }
-            )
-        }
-    }
-}
-
-@Composable
-fun ArtSpaceWallDescriptorDisplayController(
-    @DrawableRes imageResource: Int,
-    @StringRes titleArtwork: Int,
-    @StringRes descriptionArtwork: Int,
-    onStartClickedNext: () -> Unit,
-    onStartClickedPreviuos: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    var isImageExpanded by remember { mutableStateOf(false) }
+fun TipTimeLayout() {
+    var discountLimitInput by remember { mutableStateOf("") }
+    var discountPercentInput by remember { mutableStateOf("") }
+    val discountLimit = discountLimitInput.toDoubleOrNull() ?: 0.0
+    val discountPercent = discountPercentInput.toDoubleOrNull() ?: 0.0
+    val purchaseLimit = calculatePurchaseLimit(discountLimit, discountPercent)
+    val purchaseLimitString = NumberFormat.getCurrencyInstance().format(purchaseLimit)
+    val finalCost = calculateCostFinal(purchaseLimit, discountLimit)
+    val finalCostString = NumberFormat.getCurrencyInstance().format(finalCost)
 
     Column(
         modifier = Modifier
-            .padding(top = 32.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
-            .fillMaxSize(),
+            .statusBarsPadding()
+            .padding(horizontal = 40.dp)
+            .verticalScroll(rememberScrollState())
+            .safeDrawingPadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+
     ) {
-        ArtworkWall(
-            imageResource = imageResource,
-            isImageExpanded = isImageExpanded,
-            onStartClicked = { isImageExpanded = !isImageExpanded },
-            modifier = Modifier.weight(2f),
-
-            )
-        Spacer(modifier = Modifier.height(32.dp))
-        ArtworkDescriptor(
-            titleArtwork = titleArtwork,
-            descriptionArtwork = descriptionArtwork, modifier = Modifier.weight(1f)
+        Text(
+            text = stringResource(id = R.string.calculate_max_discount),
+            modifier = Modifier
+                .padding(bottom = 16.dp, top = 40.dp)
+                .align(alignment = Alignment.Start)
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        DisplayController(
-            onStartClickedPreviuos = onStartClickedPreviuos,
-            onStartClickedNext = onStartClickedNext,
-            modifier = Modifier.weight(1f)
-        )
-    }
-
-}
-
-@Composable
-fun ArtworkWall(
-    @DrawableRes imageResource: Int,
-    isImageExpanded: Boolean,
-    onStartClicked: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        shadowElevation = 16.dp,
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable(onClick = onStartClicked),
-        color = Color.White
-    ) {
-        Image(
-            modifier = modifier
-                .padding(32.dp),
-            painter = painterResource(id = imageResource),
-            contentDescription = null
-        )
-    }
-    if (isImageExpanded) {
-        FullscreenImage(imageResource = imageResource, onStartClicked = { onStartClicked.invoke() })
-    }
-}
-
-@Composable
-fun FullscreenImage(
-    @DrawableRes imageResource: Int,
-    onStartClicked: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .clickable(onClick = onStartClicked)
-    ) {
-        Image(
-            painter = painterResource(id = imageResource),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Inside
-        )
-    }
-}
-
-@Composable
-fun ArtworkDescriptor(
-    @StringRes titleArtwork: Int,
-    @StringRes descriptionArtwork: Int,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.Bottom) {
-        Surface(
-            color = Color.LightGray, modifier = Modifier
+        EditNumberField(
+            label = R.string.discount_limit,
+            leadingIcon = R.drawable.discount_limit_price,
+            value = discountLimitInput,
+            onValueChange = { discountLimitInput = it },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            ),
+            modifier = Modifier
+                .padding(bottom = 32.dp)
                 .fillMaxWidth()
-                .wrapContentHeight()
-                .verticalScroll(rememberScrollState())
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text(
-                    text = stringResource(id = titleArtwork),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 12.dp)
-                )
-                Text(
-                    text = stringResource(id = descriptionArtwork),
-                    textAlign = TextAlign.Left,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-        }
+        )
+        EditNumberField(
+            label = R.string.discount_percent,
+            leadingIcon = R.drawable.percent_icon,
+            value = discountPercentInput,
+            onValueChange = { discountPercentInput = it },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            ),
+            modifier = Modifier
+                .padding(bottom = 32.dp)
+                .fillMaxWidth()
+        )
+        Text(
+            text = stringResource(id = R.string.to_take_full_advantage_of_the_promotion),
+        )
+        Text(
+            text = stringResource(id = R.string.spend_a_total_of, purchaseLimitString),
+            style = MaterialTheme.typography.displaySmall
+        )
+        Text(
+            text = stringResource(
+                id = R.string.with_discount_percent,
+                discountPercent
+            )
+                    + "\n" +
+                    stringResource(id = R.string.and_discount_limit, discountLimit)
+                    + "\n" +
+                    stringResource(id = R.string.final_cost_with_applied_discount, finalCostString),
+            textAlign = TextAlign.Left,
+            modifier = Modifier.align(alignment = Alignment.Start)
+        )
+        Spacer(modifier = Modifier.height(150.dp))
+
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DisplayController(
-    onStartClickedPreviuos: () -> Unit,
-    onStartClickedNext: () -> Unit,
+fun EditNumberField(
+    @StringRes label: Int,
+    @DrawableRes leadingIcon: Int,
+    keyboardOptions: KeyboardOptions,
+    value: String,
+    onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-        Button(onClick = {
-            onStartClickedPreviuos.invoke()
-            Log.d("", "hice click previous")
-        }, Modifier.weight(1f)) {
-            Text(text = "Previous")
-        }
-        Spacer(modifier = Modifier.width(32.dp))
-        Button(onClick = {
-            onStartClickedNext.invoke()
-            Log.d("", "hice click next")
-        }, Modifier.weight(1f)) {
-            Text(text = "Next")
 
-        }
-    }
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(text = stringResource(id = label)) },
+        leadingIcon = { Icon(painter = painterResource(id = leadingIcon), null) },
+        singleLine = true,
+        keyboardOptions = keyboardOptions,
+        modifier = modifier,
+    )
 }
 
-@Preview(showBackground = true, showSystemUi = false)
+@VisibleForTesting
+internal fun calculatePurchaseLimit(discountLimit: Double, discountPercent: Double): Double {
+
+    val purchaseLimit = discountLimit * 100 / discountPercent
+    return (if (discountPercent != 0.0) purchaseLimit else 0.0)
+}
+
+@VisibleForTesting
+internal fun calculateCostFinal(purchaseLimit: Double, discountLimit: Double): Double {
+
+    val finalCost = purchaseLimit.minus((discountLimit))
+    return if (discountLimit != 0.0) finalCost else 0.0
+}
+
+@Preview(showBackground = true)
 @Composable
-fun ArtSpacePreview() {
-    ArtSpaceTheme {
-        ArtSpaceApp()
+fun TipTimeLayoutPreview() {
+    TipCalculatorTheme {
+        TipTimeLayout()
     }
 }
+
