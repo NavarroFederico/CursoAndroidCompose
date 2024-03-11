@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/00_basicslayout" />
+            <option value="$PROJECT_DIR$/00_kotlinfundamentals" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

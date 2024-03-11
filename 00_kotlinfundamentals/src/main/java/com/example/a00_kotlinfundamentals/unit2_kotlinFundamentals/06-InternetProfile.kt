@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose.practiceKotlinFundamentals
+package com.example.a00_kotlinfundamentals.unit2_kotlinFundamentals
 
 fun main() {
     val amanda = Person("Amanda", 33, "play tennis", null)
