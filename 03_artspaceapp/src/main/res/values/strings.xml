@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ArtSpaceApp</string>
+    <string name="red_truck_by_the_post">Red Truck by the Post</string>
+    <string name="red_truck_description">The drawing captures the simple beauty of a classic red truck parked next to a wooden post. The contrast between the bright red of the truck and the rustic brown of the post creates a striking and visually appealing image. The simple composition and attention to detail make this drawing a charming work of art.</string>
+    <string name="sportiness_in_motion">Sportiness in Motion</string>
+    <string name="autumn_landscape">Autumn landscape</string>
+    <string name="sportiness_description">The drawing captures the essence of sportiness: speed, power, and elegance. The car seems to be about to take off, and the fluid lines of the drawing convey a sense of movement and dynamism. The attention to detail and precision of the drawing make it an impressive work of art.</string>
+    <string name="autumn_landscape_description">The drawing shows an autumn landscape with a large tree in the foreground. The leaves of the tree are yellow, orange, and red, and they are starting to fall. The background of the drawing is composed of a forest of green trees and a blue sky. The composition of the drawing is harmonious and the colors are vibrant, which creates a beautiful and evocative image.</string>
+    <string name="sunset_at_the_beach">Sunset at the Beach</string>
+    <string name="sunset_at_the_beach_description">The drawing shows a sunset at a tropical beach. The sun is setting on the horizon, creating a sky full of warm colors like red, orange, and yellow. The beach is full of palm trees and umbrellas, and there are some people enjoying the sunset. The composition of the drawing is calm and serene, and the colors are vibrant, which creates a beautiful and relaxing image.</string>
+    <string name="magic_pencil">The Magic Pencil</string>
+    <string name="magic_pencil_description">A simple drawing of a motorcycle on a piece of paper. The motorcycle is drawn with thick black lines and has a red seat. At the top of the piece of paper, there is a magic pencil with the phrase \"El lápiz mágico\" written next to it.</string>
+    <string name="the_bohemian_warrior">The Bohemian Warrior</string>
+    <string name="the_bohemian_warrior_description">The drawing depicts a musician who, with his songs, seeks to awaken souls and thus win a fight to care for this world with love above all things.</string>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArtSpaceApp</string>
+    <string name="red_truck_by_the_post">Camión rojo junto al poste</string>
+    <string name="red_truck_description">El dibujo captura la belleza simple de un camión rojo clásico estacionado junto a un poste de madera. El contraste entre el rojo brillante del camión y el marrón rústico del poste crea una imagen llamativa y atractiva. La composición simple y la atención al detalle hacen de este dibujo una obra de arte encantadora.</string>
+    <string name="sportiness_in_motion">Deportividad en movimiento</string>
+    <string name="autumn_landscape">Paisaje otoñal</string>
+    <string name="sportiness_description">El dibujo captura la esencia de la deportividad: velocidad, potencia y elegancia. El auto parece estar a punto de salir disparado, y las líneas fluidas del dibujo transmiten una sensación de movimiento y dinamismo. La atención al detalle y la precisión del dibujo lo convierten en una obra de arte impresionante.</string>
+    <string name="autumn_landscape_description">El dibujo muestra un paisaje otoñal con un árbol grande en primer plano. Las hojas del árbol son de color amarillo, naranja y rojo, y están empezando a caer. El fondo del dibujo está compuesto por un bosque de árboles verdes y un cielo azul. La composición del dibujo es armoniosa y los colores son vibrantes, lo que crea una imagen hermosa y evocadora.</string>
+    <string name="sunset_at_the_beach">Atardecer en la playa</string>
+    <string name="sunset_at_the_beach_description">El dibujo muestra un atardecer en una playa tropical. El sol se está poniendo en el horizonte, creando un cielo lleno de colores cálidos como el rojo, el naranja y el amarillo. La playa está llena de palmeras y sombrillas, y hay algunas personas disfrutando del atardecer. La composición del dibujo es tranquila y serena, y los colores son vibrantes, lo que crea una imagen hermosa y relajante.</string>
+    <string name="magic_pencil">El lápiz mágico</string>
+    <string name="magic_pencil_description">Un dibujo simple de una motocicleta en una hoja de papel. La motocicleta está dibujada con líneas negras gruesas y tiene un asiento rojo. En la parte superior de la hoja de papel, hay un lápiz mágico con la frase \"El lápiz mágico\" escrita a su lado.</string>
+    <string name="the_bohemian_warrior">El bohemio guerrero</string>
+    <string name="the_bohemian_warrior_description">El dibujo representa a un musico que con sus canciones busca concientizar almas y así ganar una lucha para cuidar a este  mundo con amor por sobre todas las cosas.</string>
+</resources>
