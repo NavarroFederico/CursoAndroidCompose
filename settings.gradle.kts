@@ -17,3 +17,4 @@ rootProject.name = "CursoAndroidCompose"
 include(":app")
 include(":00_basicslayout")
 include(":00_kotlinfundamentals")
+include(":01_dicerollerapp")
