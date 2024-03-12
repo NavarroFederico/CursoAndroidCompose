@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose
+package com.example.calculatordiscounts
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface

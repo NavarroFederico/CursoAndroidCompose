@@ -1,4 +1,4 @@
-package com.example.cursoandroidcompose
+package com.example.calculatordiscounts
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

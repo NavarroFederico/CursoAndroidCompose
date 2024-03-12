@@ -1,9 +1,9 @@
-package com.example.cursoandroidcompose
+package com.example.a04_tippercentapp
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
-import com.example.cursoandroidcompose.ui.theme.TipCalculatorTheme
+import com.example.a04_tippercentapp.ui.theme.TipCalculatorTheme
 import org.junit.Rule
 import org.junit.Test
 import java.text.NumberFormat

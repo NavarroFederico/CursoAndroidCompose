@@ -1,5 +1,4 @@
-package com.example.cursoandroidcompose
-
+package com.example.a04_tippercentapp
 
 import android.os.Bundle
 import android.util.Log
@@ -42,15 +41,16 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.cursoandroidcompose.ui.theme.TipCalculatorTheme
+import com.example.a04_tippercentapp.ui.theme.TipCalculatorTheme
 import java.text.NumberFormat
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+            TipCalculatorTheme {
+                Surface() {
+                    TipTimeLayout()
                 }
             }
         }
@@ -187,4 +187,3 @@ fun TipTimeLayoutPreview() {
         TipTimeLayout()
     }
 }
-
