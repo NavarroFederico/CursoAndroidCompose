@@ -15,7 +15,11 @@
             <option value="$PROJECT_DIR$/02_lemonadeapp" />
             <option value="$PROJECT_DIR$/03_artspaceapp" />
             <option value="$PROJECT_DIR$/04_tippercentapp" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/05_affirmations" />
+            <option value="$PROJECT_DIR$/06_coursesapp" />
+            <option value="$PROJECT_DIR$/07_woofapp" />
+            <option value="$PROJECT_DIR$/08_superhero" />
+            <option value="$PROJECT_DIR$/09_patronesdedisenoapp" />
             <option value="$PROJECT_DIR$/calculatordiscounts" />
           </set>
         </option>
