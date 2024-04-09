@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake.ui
+package com.example.a12_cupcake.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.a12_cupcake.R
 import com.example.a12_cupcake.ui.components.FormattedPriceLabel
 import com.example.a12_cupcake.ui.theme.CupcakeTheme
-import com.example.cupcake.data.OrderUiState
+import com.example.a12_cupcake.data.OrderUiState
 
 /**
  * This composable expects [orderUiState] that represents the order state, [onCancelButtonClicked]

@@ -15,6 +15,9 @@
  */
 package com.example.a12_cupcake
 
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,11 +32,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.cupcake.ui.OrderViewModel
+import com.example.a12_cupcake.data.DataSource
+import com.example.a12_cupcake.ui.OrderSummaryScreen
+import com.example.a12_cupcake.ui.OrderViewModel
+import com.example.a12_cupcake.ui.SelectOptionScreen
+import com.example.a12_cupcake.ui.StartOrderScreen
+
+/**
+ * enum para definir 4 rutas de la app
+ *
+ * * Start: Selecciona la cantidad de magdalenas optando por uno de los tres botones.
+ * * Flavor: Selecciona el sabor a partir de una lista de opciones.
+ * * Pickup: Selecciona la fecha de retiro a partir de una lista de opciones.
+ * * Summary: Revisa las selecciones y envia o cancela el pedido.
+ */
+enum class CupcakeScreen() {
+    Start,
+    Flavor,
+    Pickup,
+    Summary
+}
 
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
@@ -80,5 +107,29 @@ fun CupcakeApp(
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
 
+        NavHost(
+            navController = navController,
+            startDestination = CupcakeScreen.Start.name,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(route = CupcakeScreen.Start.name) {
+                StartOrderScreen(
+                    quantityOptions = DataSource.quantityOptions,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(R.dimen.padding_medium))
+                )
+            }
+            composable(route = CupcakeScreen.Flavor.name) {
+                val context = LocalContext.current
+                SelectOptionScreen(subtotal = uiState.price, options = DataSource.flavors.map { id -> context.resources.getString(id)}, onSelectionChanged = {viewModel.setFlavor(it)}, modifier = Modifier.fillMaxHeight() )
+            }
+            composable(route = CupcakeScreen.Pickup.name){
+                SelectOptionScreen(subtotal = uiState.price, options = uiState.pickupOptions, onSelectionChanged = {viewModel.setDate(it)}, modifier = Modifier.fillMaxHeight())
+            }
+            composable(route = CupcakeScreen.Summary.name){
+                OrderSummaryScreen(orderUiState = uiState, modifier = Modifier.fillMaxHeight())
+            }
+        }
     }
 }
