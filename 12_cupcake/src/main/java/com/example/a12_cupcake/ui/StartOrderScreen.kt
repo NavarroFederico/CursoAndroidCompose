@@ -85,7 +85,7 @@ fun StartOrderScreen(
             quantityOptions.forEach { item ->
                 SelectQuantityButton(
                     labelResourceId = item.first,
-                    onClick = {}
+                    onClick = {onNextButtonClicked (item.second)}
                 )
             }
         }
@@ -110,7 +110,7 @@ fun SelectQuantityButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun StartOrderPreview() {
     CupcakeTheme {
