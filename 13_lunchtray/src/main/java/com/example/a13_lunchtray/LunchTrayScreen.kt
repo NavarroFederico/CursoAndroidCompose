@@ -15,22 +15,50 @@
  */
 package com.example.a13_lunchtray
 
+import androidx.annotation.StringRes
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.a13_lunchtray.datasource.DataSource
+import com.example.a13_lunchtray.ui.AccompanimentMenuScreen
+import com.example.a13_lunchtray.ui.CheckoutScreen
+import com.example.a13_lunchtray.ui.EntreeMenuScreen
 import com.example.a13_lunchtray.ui.OrderViewModel
+import com.example.a13_lunchtray.ui.SideDishMenuScreen
+import com.example.a13_lunchtray.ui.StartOrderScreen
 
-// TODO: Screen enum
 
+/**
+ * enum class to hold constants for each of the following Lunch Tray app screens:
+ *
+ * Start
+ * Entree menu
+ * Side dish menu
+ * Accompaniment menu
+ * Checkout
+ * Each screen should have an associated title in the form of a string. The strings are available in the starter code as resources.
+ */
+enum class LunchTrayScreen(@StringRes val title: Int) {
+    Start(title = R.string.app_name),
+    EntreMenu(title = R.string.choose_entree),
+    SideDishMenu(title = R.string.choose_side_dish),
+    AccompanimentMenu(title = R.string.choose_accompaniment),
+    Checkout(title = R.string.order_checkout)
+}
 // TODO: AppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LunchTrayApp() {
-    // TODO: Create Controller and initialization
+    //  Create Controller and initialization
+    val navController = rememberNavController()
+
 
     // Create ViewModel
     val viewModel: OrderViewModel = viewModel()
@@ -42,6 +70,42 @@ fun LunchTrayApp() {
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
 
-        // TODO: Navigation host
+        // Navigation host
+        NavHost(navController = navController, startDestination = LunchTrayScreen.Start.name) {
+            composable(LunchTrayScreen.Start.name) {
+                StartOrderScreen(onStartOrderButtonClicked = { /*TODO*/ })
+            }
+            composable(LunchTrayScreen.EntreMenu.name) {
+                EntreeMenuScreen(
+                    options = DataSource.entreeMenuItems,
+                    onCancelButtonClicked = { /*TODO*/ },
+                    onNextButtonClicked = { /*TODO*/ },
+                    onSelectionChanged = {  }
+                )
+            }
+            composable(LunchTrayScreen.SideDishMenu.name) {
+                SideDishMenuScreen(
+                    options = DataSource.sideDishMenuItems,
+                    onCancelButtonClicked = { /*TODO*/ },
+                    onNextButtonClicked = { /*TODO*/ },
+                    onSelectionChanged = { }
+                )
+            }
+            composable(LunchTrayScreen.AccompanimentMenu.name) {
+                AccompanimentMenuScreen(
+                    options = DataSource.accompanimentMenuItems,
+                    onCancelButtonClicked = { /*TODO*/ },
+                    onNextButtonClicked = { /*TODO*/ },
+                    onSelectionChanged = { }
+                )
+            }
+            composable(LunchTrayScreen.Checkout.name) {
+                CheckoutScreen(
+                    orderUiState = uiState,
+                    onNextButtonClicked = { /*TODO*/ },
+                    onCancelButtonClicked = { /*TODO*/ })
+            }
+            // Add more destinations similarly.
+        }
     }
 }
