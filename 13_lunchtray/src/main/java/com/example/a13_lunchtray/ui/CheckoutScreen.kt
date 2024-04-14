@@ -39,6 +39,19 @@ import com.example.a13_lunchtray.datasource.DataSource
 import com.example.a13_lunchtray.model.MenuItem
 import com.example.a13_lunchtray.model.OrderUiState
 
+/**
+ * Composable para la pantalla de resumen del pedido y pago.
+ *
+ * Esta función Composable muestra el resumen del pedido del usuario, incluyendo el plato principal,
+ * acompañamientos, subtotal, impuestos y total final. También presenta botones para cancelar
+ * o enviar el pedido.
+ *
+ * @param orderUiState Objeto `OrderUiState` que contiene información del pedido (OrderUiState).
+ * @param onNextButtonClicked Lambda que se invoca al hacer clic en el botón de enviar pedido ((): Unit).
+ * @param onCancelButtonClicked Lambda que se invoca al hacer clic en el botón de cancelar ((): Unit).
+ * @param modifier Modificador opcional para personalizar el estilo de la pantalla (Modifier - valor por defecto es Modifier).
+ *
+ */
 @Composable
 fun CheckoutScreen(
     orderUiState: OrderUiState,
@@ -100,6 +113,15 @@ fun CheckoutScreen(
     }
 }
 
+/**
+ * Composable para mostrar un resumen de un elemento del pedido.
+ *
+ * Esta función Composable muestra el nombre y precio formateado de un elemento del pedido
+ * (plato principal, acompañamiento, etc.) recibido como parámetro.
+ *
+ * @param item Objeto `MenuItem` opcional que representa el elemento del pedido (MenuItem?).
+ * @param modifier Modificador opcional para personalizar el estilo del resumen (Modifier - valor por defecto es Modifier).
+ */
 @Composable
 fun ItemSummary(
     item: MenuItem?,
@@ -114,6 +136,17 @@ fun ItemSummary(
     }
 }
 
+/**
+ * Composable para mostrar un subcosto del pedido (subtotal, impuestos, etc.).
+ *
+ * Esta función Composable muestra un texto que combina un recurso de string
+ * (por ejemplo, "Subtotal") con el precio formateado recibido como parámetro.
+ *
+ * @param resourceId Identificador de recurso de string que representa el subcosto (int - @StringRes).
+ * @param price Precio formateado del subcosto como cadena de texto (String).
+ * @param modifier Modificador opcional para personalizar el estilo del subcosto (Modifier - valor por defecto es Modifier).
+ *
+ */
 @Composable
 fun OrderSubCost(
     @StringRes resourceId: Int,
@@ -126,6 +159,24 @@ fun OrderSubCost(
     )
 }
 
+/**
+ * Composable de previsualización para la pantalla de resumen del pedido y pago.
+ *
+ * Esta función Composable se utiliza con la anotación `@Preview` para previsualizar
+ * la pantalla de resumen del pedido y pago en Android Studio. Se proporciona un objeto
+ * `OrderUiState` de ejemplo con valores predeterminados.
+ *
+ * @param orderUiState Objeto `OrderUiState` predefinido con información del pedido para la previsualización
+ * (valores por defecto: `entree = DataSource.entreeMenuItems[0]`,
+ * `sideDish = DataSource.sideDishMenuItems[0]`,
+ * `accompaniment = DataSource.accompanimentMenuItems[0]`,
+ * `itemTotalPrice = 15.00`,
+ * `orderTax = 1.00`,
+ * `orderTotalPrice = 16.00`).
+ *
+ * **Importante:** Esta función está destinada únicamente para previsualizar la pantalla del pedido
+ * y no se utiliza en la aplicación real.
+ */
 @Preview(showBackground = true)
 @Composable
 fun CheckoutScreenPreview() {

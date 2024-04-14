@@ -27,6 +27,22 @@ import com.example.a13_lunchtray.datasource.DataSource
 import com.example.a13_lunchtray.model.MenuItem
 import com.example.a13_lunchtray.model.MenuItem.SideDishItem
 
+/**
+ * Composable para la pantalla del menú de acompañamientos.
+ *
+ * Esta función Composable extiende la funcionalidad de `BaseMenuScreen` para mostrar
+ * específicamente un menú de acompañamientos. Se espera recibir una lista de objetos
+ * `SideDishItem` que representan los acompañamientos disponibles.
+ *
+ * @param options Lista de objetos `SideDishItem` que representan los acompañamientos del menú (List<SideDishItem>).
+ * @param onCancelButtonClicked Lambda que se invoca al hacer clic en el botón de cancelar ((): Unit).
+ * @param onNextButtonClicked Lambda que se invoca al hacer clic en el botón de continuar ((): Unit).
+ * @param onSelectionChanged Lambda que se invoca cuando se selecciona un acompañamiento ((SideDishItem) -> Unit).
+ * @param modifier Modificador opcional para personalizar el estilo de la pantalla (Modifier - valor por defecto es Modifier).
+ *
+ * **Nota:** Esta función reutiliza la funcionalidad de `BaseMenuScreen` para la estructura base
+ * de la pantalla del menú.
+ */
 @Composable
 fun SideDishMenuScreen(
     options: List<SideDishItem>,

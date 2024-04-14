@@ -27,6 +27,22 @@ import com.example.a13_lunchtray.datasource.DataSource
 import com.example.a13_lunchtray.model.MenuItem
 import com.example.a13_lunchtray.model.MenuItem.EntreeItem
 
+/**
+ * Composable para la pantalla del menú de platos principales.
+ *
+ * Esta función Composable extiende la funcionalidad de `BaseMenuScreen` para mostrar
+ * específicamente un menú de platos principales. Se espera recibir una lista de objetos
+ * `EntreeItem` que representan los platos disponibles.
+ *
+ * @param options Lista de objetos `EntreeItem` que representan los platos principales del menú (List<EntreeItem>).
+ * @param onCancelButtonClicked Lambda que se invoca al hacer clic en el botón de cancelar ((): Unit).
+ * @param onNextButtonClicked Lambda que se invoca al hacer clic en el botón de continuar ((): Unit).
+ * @param onSelectionChanged Lambda que se invoca cuando se selecciona un plato principal ((EntreeItem) -> Unit).
+ * @param modifier Modificador opcional para personalizar el estilo de la pantalla (Modifier - valor por defecto es Modifier).
+ *
+ * **Nota:** Esta función reutiliza la funcionalidad de `BaseMenuScreen` para la estructura base
+ * de la pantalla del menú.
+ */
 @Composable
 fun EntreeMenuScreen(
     options: List<EntreeItem>,
@@ -44,6 +60,21 @@ fun EntreeMenuScreen(
     )
 }
 
+/**
+ * Composable de previsualización para la pantalla del menú de platos principales.
+ *
+ * Esta función Composable se utiliza con la anotación `@Preview` para previsualizar
+ * la pantalla del menú de platos principales en Android Studio.
+ *
+ * @param options Lista de objetos `EntreeItem` que representan los platos principales del menú (List<EntreeItem>). (Valor por defecto: `DataSource.entreeMenuItems`)
+ * @param onCancelButtonClicked Lambda que se invoca al hacer clic en el botón de cancelar ((): Unit). (Valor por defecto: función vacía)
+ * @param onNextButtonClicked Lambda que se invoca al hacer clic en el botón de continuar ((): Unit). (Valor por defecto: función vacía)
+ * @param onSelectionChanged Lambda que se invoca cuando se selecciona un plato principal ((EntreeItem) -> Unit). (Valor por defecto: función vacía)
+ * @param modifier Modificador opcional para personalizar el estilo de la previsualización (Modifier - valor por defecto agrega padding y scroll vertical).
+ *
+ * **Importante:** Esta función está destinada únicamente para previsualizar la pantalla del menú
+ * y no se utiliza en la aplicación real.
+ */
 @Preview(showBackground = true)
 @Composable
 fun EntreeMenuPreview(){

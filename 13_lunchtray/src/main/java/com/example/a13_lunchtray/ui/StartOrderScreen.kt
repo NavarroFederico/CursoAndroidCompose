@@ -31,6 +31,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.a13_lunchtray.R
 
+/**
+ * Composable para la pantalla inicial para iniciar un pedido.
+ *
+ * Esta función Composable muestra un botón centralizado que permite al usuario iniciar
+ * un nuevo pedido. Al hacer clic en el botón, se invoca la lambda `onStartOrderButtonClicked`.
+ *
+ * @param onStartOrderButtonClicked Lambda que se invoca al hacer clic en el botón para iniciar un pedido ((): Unit).
+ * @param modifier Modificador opcional para personalizar el estilo de la pantalla (Modifier - valor por defecto es Modifier).
+ *
+ */
 @Composable
 fun StartOrderScreen(
     onStartOrderButtonClicked: () -> Unit,
