@@ -16,6 +16,7 @@
 package com.example.a14_replyapp.ui
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -54,6 +55,10 @@ fun ReplyDetailsScreen(
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    BackHandler {
+        onBackPressed()
+
+    }
     Box(modifier = modifier) {
         LazyColumn(
             modifier = Modifier
@@ -85,6 +90,7 @@ private fun ReplyDetailsScreenTopBar(
     replyUiState: ReplyUiState,
     modifier: Modifier = Modifier
 ) {
+
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -121,6 +127,7 @@ private fun ReplyEmailDetailsCard(
     mailboxType: MailboxType,
     modifier: Modifier = Modifier,
 ) {
+
     val context = LocalContext.current
     val displayToast = { text: String ->
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
