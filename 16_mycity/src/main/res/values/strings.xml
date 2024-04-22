@@ -1,3 +1,85 @@
 <resources>
-    <string name="app_name">My City</string>
+    <string name="app_name">Villa Mantero</string>
+
+    <string name="park_gral_galarza">Plaza General Galarza</string>
+    <string name="park_gral_galarza_description">Plaza principal del municipio
+        de Villa Mantero. Se encuentra entre las calles Juan Manuel Seró y
+        9 de Julio en la intersección con las calles Tomás Rocamora y Centenario.
+        A sus alrededores podemos encontrar la iglesia "San Miguel Arcangel", la
+        comisaria de Villa Mantero, y las escuelas primaria y secundaria.  </string>
+    <string name="park_gral_galarza_address">Intersección Juan Manuel Seró y 9 de Julio.</string>
+    <string name="park_gral_galarza_openingHours">Todo el día</string>
+
+    <string name="park_plebistero_hein">Plaza Plebistero Hein</string>
+    <string name="park_plebistero_description">Parque recreativo de Villa Matero.
+        El predio cuenta con juegos infantiles, senderos para caminar y correr, canchas de futbol y basquet,
+        además de un sector para hacer ejercicios aerobicos.
+        Se encuentra entre las calles Juan Manuel Seró y 1ero de Mayo.</string>
+    <string name="park_plebistero_address">Intersección Juan Manuel Seró y 1ero de Mayo.</string>
+    <string name="park_plebistero_openingHours">Todo el día</string>
+
+    <string name="camping_municipal">Camping Municipal La Picada</string>
+    <string name="camping_municipal_description">El camping municipal La Picada,
+        es un espacio al aire libre al costado del afluente Arroyo Gena.
+    El camping cuenta con parrillas y mesas para que puedan pasar el día en familia.</string>
+    <string name="camping_municipal_address">Calle diamante</string>
+    <string name="camping_municipal_openingHours">De lunes a viernes hasta las 19 hs.</string>
+
+
+    <string name="shopping_supermercado_el_chino">Supermercado El Chino</string>
+    <string name="shopping_supermercado_el_chino_description">Supermercado El Chino. Autoservicio que provee de productos de almacen, carnicería y verdulería.</string>
+    <string name="shopping_supermercado_el_chino_adrees">Juan manuel Seró entre La Paz y Gualeguaychú.</string>
+    <string name="shopping_supermercado_el_chino_openHours">De lunes a viernes y domingos de 9hs a 13hs y de 17hs a 20hs. Los Sabados de 9hs a 13hs y de 17hs a 21hs</string>
+
+    <string name="shopping_panaderia">Panaderia y heladería Los Guris</string>
+    <string name="shopping_panaderia_description">Panaderia y heladería familiar.</string>
+    <string name="shopping_panaderia_address">Gualeguaychú entre 25 de Mayo y Córdoba</string>
+    <string name="shopping_panaderia_openingHours">De lunes a viernes y domingos de 9hs a 13hs y de 17hs a 20hs. Los Sabados de 9hs a 13hs y de 17hs a 21hs</string>
+
+    <string name="shopping_supermercado_lyl">Supermercado El Chino</string>
+    <string name="shopping_supermercado_lyl_description">Supermercado El Chino. Autoservicio que provee de productos de almacen, carnicería y verdulería.</string>
+    <string name="shopping_supermercado_lyl_adrees">Esquina 9 de Julio y Emilio Perina</string>
+    <string name="shopping_supermercado_lyl_openHours">De lunes a viernes y domingos de 9hs a 13hs y de 17hs a 20hs. Los Sabados de 9hs a 13hs y de 17hs a 21hs</string>
+
+    <string name="housing_alojamiento">Alojamiento Mari y Roberto</string>
+    <string name="housing_alojamiento_description">El complejo cuenta con dos alojamientos para 5 personas. Quincho, parrilla y piscina.</string>
+    <string name="housing_alojamiento_address">Emilio Perina 3272 </string>
+    <string name="housing_alojamiento_openingHours">Todos los días , podes comunicarte a 03442416794 .</string>
+
+    <string name="housing_bungalow">Bungalows</string>
+    <string name="housing_bungalow_description">El complejo cuenta con 3 alojamientos para parejas.</string>
+    <string name="housing_bungalow_address">Juan Manuel Seró. </string>
+    <string name="housing_bungalow_opening">Todos los días..</string>
+
+    <string name="housing_rancho">Rancho aparte.</string>
+    <string name="housing_rancho_description">Rancho aparte es una vivienda que se alquila para viajeros. tiene excelentes comodidades para los viajantes.</string>
+    <string name="housing_rancho_address">Entre 1 de Mayo y Sarmiento</string>
+    <string name="housing_rancho_openingHours">Todo el día.</string>
+
+    <string name="government_municipalidad">Municipalidad de Villa mantero</string>
+    <string name="gobernment_municipalidad_description">Municipalidad de Villa Mantero</string>
+    <string name="gobernment_municipalidad_address">Paraná y Gorocica Nº 602</string>
+    <string name="gobernment_municipalidad_openingHours">Lunes a Viernes de 8hs a 12hs</string>
+
+
+    <string name="government_hospital">Hospital de Villa mantero "Andrés Zaninetti"</string>
+    <string name="gobernment_hospital_description">Hospital de Villa Mantero "Andrés Zaninetti"</string>
+    <string name="gobernment_hospital_address">Juan M. Seró Nº 744</string>
+    <string name="gobernment_hospital_openingHours">Todos los días.</string>
+
+    <string name="government_comisaria">Comisaría de Villa mantero</string>
+    <string name="gobernment_comisaria_description">Comisaría de Villa Mantero.</string>
+    <string name="gobernment_comisaria_address">Centenario 366</string>
+    <string name="gobernment_comisaria_openingHours">Todos los días.</string>
+
+    <string name="government_bombero">Bomberos Voluntarios de Villa mantero</string>
+    <string name="gobernment_bombero_description">Bomberos de Villa Mantero. Jefe de bombero Juan R. Gauna. Tel. 03445-15431411 </string>
+    <string name="gobernment_bombero_address">Sin especificar</string>
+    <string name="gobernment_bombero_openingHours">Todos los días.</string>
+
+    <string name="government_iglesia">Iglesia de Villa mantero</string>
+    <string name="gobernment_iglesia_description">Iglesia de Villa Mantero. 9 de Julio 880. Tel. 03445-494027</string>
+    <string name="gobernment_iglesia_address">9 de Julio 880</string>
+    <string name="gobernment_iglesia_openingHours">Lunes a Viernes de 8hs a 12hs</string>
+
 </resources>
