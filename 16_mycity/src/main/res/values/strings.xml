@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Villa Mantero</string>
-
+<!--Parks-->
     <string name="park_gral_galarza">Plaza General Galarza</string>
     <string name="park_gral_galarza_description">Plaza principal del municipio
         de Villa Mantero. Se encuentra entre las calles Juan Manuel Seró y
@@ -25,7 +25,7 @@
     <string name="camping_municipal_address">Calle diamante</string>
     <string name="camping_municipal_openingHours">De lunes a viernes hasta las 19 hs.</string>
 
-
+<!--Shoopping Centers-->
     <string name="shopping_supermercado_el_chino">Supermercado El Chino</string>
     <string name="shopping_supermercado_el_chino_description">Supermercado El Chino. Autoservicio que provee de productos de almacen, carnicería y verdulería.</string>
     <string name="shopping_supermercado_el_chino_adrees">Juan manuel Seró entre La Paz y Gualeguaychú.</string>
@@ -41,6 +41,7 @@
     <string name="shopping_supermercado_lyl_adrees">Esquina 9 de Julio y Emilio Perina</string>
     <string name="shopping_supermercado_lyl_openHours">De lunes a viernes y domingos de 9hs a 13hs y de 17hs a 20hs. Los Sabados de 9hs a 13hs y de 17hs a 21hs</string>
 
+    <!--Housing-->
     <string name="housing_alojamiento">Alojamiento Mari y Roberto</string>
     <string name="housing_alojamiento_description">El complejo cuenta con dos alojamientos para 5 personas. Quincho, parrilla y piscina.</string>
     <string name="housing_alojamiento_address">Emilio Perina 3272 </string>
@@ -56,6 +57,7 @@
     <string name="housing_rancho_address">Entre 1 de Mayo y Sarmiento</string>
     <string name="housing_rancho_openingHours">Todo el día.</string>
 
+    <!--Government Offices-->
     <string name="government_municipalidad">Municipalidad de Villa mantero</string>
     <string name="gobernment_municipalidad_description">Municipalidad de Villa Mantero</string>
     <string name="gobernment_municipalidad_address">Paraná y Gorocica Nº 602</string>

@@ -10,7 +10,7 @@ data class Recommendation (
     @StringRes val descriptionResourceId : Int,
     @StringRes val address : Int,
     @StringRes val openingHours : Int,
-    @DrawableRes val imageResourceId : Int,
+    @DrawableRes val imageResourceId : Int? = null,
     val category : CategoryType,
 
 
