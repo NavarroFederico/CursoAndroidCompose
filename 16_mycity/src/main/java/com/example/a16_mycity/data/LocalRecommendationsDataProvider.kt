@@ -7,7 +7,7 @@ import com.example.a16_mycity.model.Recommendation
 object LocalRecommendationsDataProvider {
     val defaultRecommendation = getRecommendationData()[0]
 
-    private fun getRecommendationData(): List<Recommendation> {
+    fun getRecommendationData(): List<Recommendation> {
         return listOf(
             Recommendation(
                 id = 1,
