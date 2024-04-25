@@ -1,18 +1,20 @@
 package com.example.a16_mycity.model
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.ui.graphics.Color
 
-enum class CategoryType(val color: Color) {
+enum class CategoryType() {
     Parks(
-        color = Color.Green
+
     ),
     ShoppingCenters(
-        color = Color.Magenta
+
     ),
     Housing(
-        color = Color.Blue
+
     ),
     GovernmentOffices(
-        color = Color.LightGray
+
     )
 }
