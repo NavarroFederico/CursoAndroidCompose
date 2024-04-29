@@ -5,10 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.HideImage
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -89,15 +92,34 @@ private fun CityRecommendationsDetailsCard(
         modifier = modifier,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
+        Box(modifier = Modifier.fillMaxWidth())
         if (recommendation.imageResourceId != null) {
             Image(
                 painter = painterResource(id = recommendation.imageResourceId),
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier
+                    .aspectRatio(16f / 9f)
+                    .fillMaxWidth()
             )
+        } else {
+            Image(
+                imageVector = Icons.Outlined.HideImage,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.colorScheme.primaryContainer)
+                    .aspectRatio(16f / 9f),
+                alpha = 0.4f
+            )
+
         }
         Column(
             modifier = Modifier
-                .padding(horizontal = dimensionResource(id = R.dimen.detail_card_inner_padding))
+                .padding(
+                    horizontal = dimensionResource(id = R.dimen.detail_card_inner_padding),
+                    vertical = dimensionResource(id = R.dimen.detail_card_inner_padding)
+                )
+
         ) {
             Text(
                 text = stringResource(id = recommendation.titleResourceId),
@@ -105,7 +127,14 @@ private fun CityRecommendationsDetailsCard(
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier
                     .padding(horizontal = dimensionResource(id = R.dimen.detail_card_inner_padding))
-
+            )
+            Text(
+                text = stringResource(id = recommendation.descriptionResourceId),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(
+                    vertical = dimensionResource(id = R.dimen.padding_detail_content_vertical),
+                    horizontal = dimensionResource(R.dimen.detail_card_inner_padding)
+                )
             )
         }
     }
@@ -117,7 +146,7 @@ private fun CityRecommendationsDetailsCardPreview() {
     CursoAndroidComposeTheme {
         Surface {
             CityRecommendationsDetailsCard(
-                recommendation = LocalRecommendationsDataProvider.getRecommendationData()[0],
+                recommendation = LocalRecommendationsDataProvider.getRecommendationData()[1],
                 categoryType = LocalRecommendationsDataProvider.getRecommendationData()[0].category,
             )
         }
