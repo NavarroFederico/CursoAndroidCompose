@@ -48,8 +48,8 @@ fun CityApp(
         navigationType = navigationType,
         contentType = contentType,
         cityUiState = cityUiState,
-        onTabPressed = { recommendationType: CategoryType ->
-            viewModel.updateCurrentRecommendation(categoryType = recommendationType)
+        onTabPressed = { categoryType: CategoryType ->
+            viewModel.updateCurrentRecommendation(categoryType = categoryType)
             viewModel.resetHomeScreenStates()
         },
         onRecommendationPressed = { recommendation: Recommendation ->

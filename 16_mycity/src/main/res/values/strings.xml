@@ -83,5 +83,9 @@
     <string name="gobernment_iglesia_description">Iglesia de Villa Mantero. 9 de Julio 880. Tel. 03445-494027</string>
     <string name="gobernment_iglesia_address">9 de Julio 880</string>
     <string name="gobernment_iglesia_openingHours">Lunes a Viernes de 8hs a 12hs</string>
+    <string name="tab_parks">Parks</string>
+    <string name="tab_governmentOffices">Government Offices</string>
+    <string name="tab_housing">Housing</string>
+    <string name="tab_shoppingCenters">Shopping Centers</string>
 
 </resources>
