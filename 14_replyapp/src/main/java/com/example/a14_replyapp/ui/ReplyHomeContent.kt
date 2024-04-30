@@ -32,6 +32,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,9 +45,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.a14_replyapp.R
 import com.example.a14_replyapp.data.Email
 import com.example.a14_replyapp.data.local.LocalAccountsDataProvider
+import com.example.a14_replyapp.data.local.LocalEmailsDataProvider
+import com.example.a14_replyapp.ui.theme.ReplyTheme
 
 
 @Composable

@@ -19,6 +19,9 @@ import androidx.compose.material.icons.outlined.Park
 import androidx.compose.material.icons.outlined.Storefront
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
@@ -123,6 +126,105 @@ fun CityHomeScreen(
     }
 }
 
+
+@Composable
+private fun CityAppContent(
+    navigationType: CityNavigationType,
+    contentType: CityContentType,
+    cityUiState: CityUiState,
+    onTabPressed: (CategoryType) -> Unit,
+    onRecommendationPressed: (Recommendation) -> Unit,
+    navigationItemContentList: List<NavigationItemContent>,
+    modifier: Modifier = Modifier,
+) {
+    Row(modifier = Modifier.fillMaxSize()) {
+        AnimatedVisibility(visible = navigationType == CityNavigationType.NAVIGATION_RAIL) {
+            val navigationRailContentDescription = stringResource(id = R.string.navigation_rail)
+            CityNavigationRail(
+                currentTab = cityUiState.currentRecommendationType,
+                onTabPressed = onTabPressed,
+                navigationItemContentList = navigationItemContentList,
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.inverseOnSurface)
+        ) {
+            if (contentType == CityContentType.LIST_AND_DETAIL) {
+                CityListAndDetailContent(
+                    cityUiState = cityUiState,
+                    onItemCardPressed = onRecommendationPressed,
+                    modifier = Modifier.weight(1f)
+                )
+            } else {
+                CityListOnlyContent(
+                    cityUiState = cityUiState,
+                    onItemCardPressed = onRecommendationPressed,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
+            AnimatedVisibility(visible = navigationType == CityNavigationType.BOTTOM_NAVIGATION) {
+                CityBottomNavigationBar(
+                    currentTab = cityUiState.currentRecommendationType,
+                    onTabPressed = onTabPressed,
+                    navigationItemContentList= navigationItemContentList,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
+    }
+
+}
+
+
+
+@Composable
+private fun CityNavigationRail(
+    currentTab: CategoryType,
+    onTabPressed: (CategoryType) -> Unit,
+    navigationItemContentList: List<NavigationItemContent>,
+    modifier: Modifier = Modifier
+
+) {
+    NavigationRail(
+        modifier = modifier
+    ) {
+        for (navItem in navigationItemContentList) {
+            NavigationRailItem(
+                selected = currentTab == navItem.categoryType,
+                onClick = { onTabPressed(navItem.categoryType) },
+                icon = {
+                    Icon(
+                        imageVector = navItem.icon,
+                        contentDescription = navItem.text
+                    )
+                })
+        }
+    }
+}
+@Composable
+private fun CityBottomNavigationBar(
+    currentTab: CategoryType,
+    onTabPressed: (CategoryType) -> Unit,
+    navigationItemContentList: List<NavigationItemContent>,
+    modifier: Modifier = Modifier,
+){
+    NavigationBar(modifier= modifier){
+        for(navItem in navigationItemContentList){
+            NavigationBarItem(
+                selected = currentTab == navItem.categoryType,
+                onClick = {onTabPressed(navItem.categoryType)},
+                icon = {
+                    Icon(imageVector = navItem.icon,
+                        contentDescription = navItem.text)
+                }
+            )
+        }
+    }
+}
 @Composable
 private fun NavigationDrawerContent(
     selectedDestination: CategoryType,
@@ -161,103 +263,6 @@ private fun NavigationDrawerContent(
 }
 
 @Composable
-private fun CityAppContent(
-    navigationType: CityNavigationType,
-    contentType: CityContentType,
-    cityUiState: CityUiState,
-    onTabPressed: (CategoryType) -> Unit,
-    onRecommendationPressed: (Recommendation) -> Unit,
-    navigationItemContentList: List<NavigationItemContent>,
-    modifier: Modifier = Modifier,
-) {
-    Row(modifier = Modifier.fillMaxSize()) {
-        AnimatedVisibility(visible = navigationType == CityNavigationType.NAVIGATION_RAIL) {
-            val navigationRailContentDescription = stringResource(id = R.string.navigation_rail)
-            CityNavigationRail(
-                currentTab = cityUiState.currentRecommendationType,
-                onTabPressed = onTabPressed,
-                navigationItemContentList = navigationItemContentList,
-            )
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.inverseOnSurface)
-        ) {
-            if (contentType == CityContentType.LIST_AND_DETAIL) {
-                CityListAndDetailContent(
-                    replyUiState = cityUiState,
-                    onItemCardPressed = onRecommendationPressed,
-                    modifier = Modifier.weight(1f)
-                )
-            } else {
-                CityListOnlyContent(
-                    cityUiState = cityUiState,
-                    onItemCardPressed = onRecommendationPressed,
-                    modifier = Modifier.weight(1f)
-                )
-            }
-            val bottomNavigationContentDescription = stringResource(id = R.string.navigation_bottom)
-            AnimatedVisibility(visible = navigationType == CityNavigationType.BOTTOM_NAVIGATION) {
-                CityBottomNavigationBar(
-                    currentTab = cityUiState.currentRecommendationType,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-        }
-
-    }
-
-}
-
-@Composable
-fun CityListAndDetailContent(
-    cityUiState: CityUiState,
-    onItemCardPressed: (Recommendation) -> Unit,
-    modifier: Modifier
-) {
-    val recommendations = cityUiState.currentCategoryRecommendations
-
-    LazyColumn(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.recommendation_list_item_vertical_spacing))
-    ) {
-        item {
-            CityHomeTopBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = dimensionResource(id =))
-            )
-        }
-    }
-}
-
-@Composable
-private fun CityNavigationRail(
-    currentTab: CategoryType,
-    onTabPressed: (CategoryType) -> Unit,
-    navigationItemContentList: List<NavigationItemContent>,
-    modifier: Modifier = Modifier
-
-) {
-    NavigationRail(
-        modifier = modifier
-    ) {
-        for (navItem in navigationItemContentList) {
-            NavigationRailItem(
-                selected = currentTab == navItem.categoryType,
-                onClick = { onTabPressed(navItem.categoryType) },
-                icon = {
-                    Icon(
-                        imageVector = navItem.icon,
-                        contentDescription = navItem.text
-                    )
-                })
-        }
-    }
-}
-
-@Composable
 fun NavigationDrawerHeader(modifier: Modifier) {
     Row(
         modifier = modifier,
@@ -268,14 +273,10 @@ fun NavigationDrawerHeader(modifier: Modifier) {
     }
 }
 
-@Preview
-@Composable
-fun previewDefault() {
-    NavigationDrawerHeader(modifier = Modifier.fillMaxWidth())
-}
 
 private data class NavigationItemContent(
     val categoryType: CategoryType,
     val icon: ImageVector,
     val text: String
 )
+

@@ -17,4 +17,8 @@
     <dimen name="profile_image_padding">16dp</dimen>
     <dimen name="drawer_padding_header">16dp</dimen>
     <dimen name="reply_logo_size">48dp</dimen>
+    <dimen name="list_and_detail_list_padding_end">16dp</dimen>
+    <dimen name="list_and_detail_list_padding_top">20dp</dimen>
+    <dimen name="detail_topbar_back_button_padding_horizontal">24dp</dimen>
+    <dimen name="detail_subject_padding_end">40dp</dimen>
 </resources>

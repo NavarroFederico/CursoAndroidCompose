@@ -1,5 +1,6 @@
 package com.example.a16_mycity.ui
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -64,32 +66,42 @@ fun CityListOnlyContent(
 }
 
 @Composable
-private fun CityHomeTopBar(modifier: Modifier = Modifier) {
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-    ) {
-        CityLogo(
+fun CityListAndDetailContent(
+    cityUiState: CityUiState,
+    onItemCardPressed: (Recommendation) -> Unit,
+    modifier: Modifier
+) {
+    val recommendations = cityUiState.currentCategoryRecommendations
+    Row(modifier = modifier) {
+        LazyColumn(
             modifier = Modifier
-                .size(dimensionResource(R.dimen.topbar_logo_size))
-                .padding(start = dimensionResource(R.dimen.topbar_logo_padding_start))
+                .weight(1f)
+                .padding(
+                    end = dimensionResource(R.dimen.list_and_detail_list_padding_end),
+                    top = dimensionResource(R.dimen.list_and_detail_list_padding_top)
+                ),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.recommendation_list_item_vertical_spacing))
+        ) {
+            items(
+                recommendations,
+                key = { recommendation -> recommendation.id }) { recommendation ->
+                CityRecommendationListItem(
+                    recommendation = recommendation,
+                    selected = cityUiState.currentSelectedRecommendation.id == recommendation.id,
+                    onCardClick = {
+                        onItemCardPressed(recommendation)
+                    },
+                )
+            }
+        }
+        val activity = LocalContext.current as Activity
+        CityDetailsScreen(
+            cityUiState = cityUiState,
+            onBackPressed = { activity.finish() },
+            modifier = Modifier.weight(1f)
         )
     }
 }
-
-@Composable
-fun CityLogo(
-    modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.primary
-) {
-    Text(
-        text = stringResource(id = R.string.app_name).uppercase(),
-        fontFamily = FontFamily.Monospace,
-    )
-
-}
-
 @Composable
 fun CityRecommendationListItem(
     recommendation: Recommendation,
@@ -137,6 +149,36 @@ fun CityRecommendationListItem(
     }
 }
 
+@Composable
+private fun CityHomeTopBar(modifier: Modifier = Modifier) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+    ) {
+        CityLogo(
+            modifier = Modifier
+                .size(dimensionResource(R.dimen.topbar_logo_size))
+                .padding(start = dimensionResource(R.dimen.topbar_logo_padding_start))
+        )
+    }
+}
+
+@Composable
+fun CityLogo(
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.primary
+) {
+    Text(
+        text = stringResource(id = R.string.app_name).uppercase(),
+        fontFamily = FontFamily.Monospace,
+        modifier = modifier,
+    )
+
+}
+
+
+
 
 @Preview
 @Composable
@@ -145,11 +187,11 @@ fun previewReplyHomeTopBar() {
         LocalRecommendationsDataProvider.getRecommendationData().groupBy { it.category }
 
 
-        val cityUiState= CityUiState(
-            recommendationsList = recommendations,
-            currentSelectedRecommendation = recommendations[CategoryType.Housing]?.get(0)
-                ?: LocalRecommendationsDataProvider.defaultRecommendation
-        )
+    val cityUiState = CityUiState(
+        recommendationsList = recommendations,
+        currentSelectedRecommendation = recommendations[CategoryType.Housing]?.get(0)
+            ?: LocalRecommendationsDataProvider.defaultRecommendation
+    )
 
     CursoAndroidComposeTheme {
         Surface {
