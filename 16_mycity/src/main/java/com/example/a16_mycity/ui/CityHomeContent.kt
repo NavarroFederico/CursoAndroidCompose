@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.a16_mycity.R
 import com.example.a16_mycity.data.LocalRecommendationsDataProvider
 import com.example.a16_mycity.model.CategoryType
@@ -37,7 +36,7 @@ fun CityListOnlyContent(
     modifier: Modifier = Modifier,
 ) {
 
-    val recommendations = cityUiState.currentRecommendationCategory
+    val recommendations = cityUiState.currentCategoryRecommendations
 
     LazyColumn(
         modifier = modifier,

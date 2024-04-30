@@ -11,5 +11,5 @@ data class CityUiState(
     val isShowingHomepage: Boolean = true
 )
 {
-    val currentRecommendationCategory: List<Recommendation> by lazy { recommendationsList[currentRecommendationType]!! }
+    val currentCategoryRecommendations: List<Recommendation> by lazy { recommendationsList[currentRecommendationType]!! }
 }

@@ -87,5 +87,8 @@
     <string name="tab_governmentOffices">Government Offices</string>
     <string name="tab_housing">Housing</string>
     <string name="tab_shoppingCenters">Shopping Centers</string>
+    <string name="navigation_drawer">Navigation Drawer</string>
+    <string name="navigation_rail">Navigation Rail</string>
+    <string name="navigation_bottom">Navigation Bottom</string>
 
 </resources>
