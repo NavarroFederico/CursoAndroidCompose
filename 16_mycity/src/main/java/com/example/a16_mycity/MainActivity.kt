@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -56,7 +55,8 @@ fun CityAppMediumPreview() {
         }
     }
 }
-@Preview(showBackground = true)
+
+@Preview(showBackground = true, device = "id:pixel_tablet", showSystemUi = true)
 @Composable
 fun CityAppExpandedPreview() {
     CursoAndroidComposeTheme {

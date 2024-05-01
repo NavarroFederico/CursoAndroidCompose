@@ -6,7 +6,6 @@ import com.example.a16_mycity.model.CategoryType
 import com.example.a16_mycity.model.Recommendation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 
@@ -44,7 +43,8 @@ class CityViewModel : ViewModel() {
             it.copy(
                 currentSelectedRecommendation = it.recommendationsList[it.currentRecommendationType]?.get(
                     0
-                ) ?: LocalRecommendationsDataProvider.defaultRecommendation
+                ) ?: LocalRecommendationsDataProvider.defaultRecommendation,
+                isShowingHomepage = true
             )
         }
     }

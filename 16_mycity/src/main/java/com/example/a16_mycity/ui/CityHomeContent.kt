@@ -1,12 +1,13 @@
 package com.example.a16_mycity.ui
 
 import android.app.Activity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -20,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
@@ -69,13 +71,13 @@ fun CityListOnlyContent(
 fun CityListAndDetailContent(
     cityUiState: CityUiState,
     onItemCardPressed: (Recommendation) -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     val recommendations = cityUiState.currentCategoryRecommendations
     Row(modifier = modifier) {
         LazyColumn(
             modifier = Modifier
-                .weight(1f)
+                .weight(0.8f)
                 .padding(
                     end = dimensionResource(R.dimen.list_and_detail_list_padding_end),
                     top = dimensionResource(R.dimen.list_and_detail_list_padding_top)
@@ -102,6 +104,7 @@ fun CityListAndDetailContent(
         )
     }
 }
+
 @Composable
 fun CityRecommendationListItem(
     recommendation: Recommendation,
@@ -152,14 +155,11 @@ fun CityRecommendationListItem(
 @Composable
 private fun CityHomeTopBar(modifier: Modifier = Modifier) {
     Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
     ) {
         CityLogo(
-            modifier = Modifier
-                .size(dimensionResource(R.dimen.topbar_logo_size))
-                .padding(start = dimensionResource(R.dimen.topbar_logo_padding_start))
         )
     }
 }
@@ -169,15 +169,37 @@ fun CityLogo(
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.primary
 ) {
-    Text(
-        text = stringResource(id = R.string.app_name).uppercase(),
-        fontFamily = FontFamily.Monospace,
-        modifier = modifier,
-    )
+    Box(modifier = modifier) {
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = "Municipalidad de",
+                    style = MaterialTheme.typography.titleSmall,
+
+                    )
+                Text(
+                    text = stringResource(id = R.string.app_name).uppercase(),
+                    fontFamily = FontFamily.SansSerif,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = color,
+                )
+
+            }
+            Image(
+                painter = painterResource(id = R.drawable.image_removebg_preview__2_),
+                contentDescription = null,
+                modifier = Modifier
+            )
+
+        }
+
+    }
 
 }
-
-
 
 
 @Preview

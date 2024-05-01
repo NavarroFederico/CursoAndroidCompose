@@ -45,7 +45,7 @@ fun CityDetailsScreen(
     BackHandler {
         onBackPressed()
     }
-    Box() {
+    Box(modifier = modifier) {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -59,7 +59,9 @@ fun CityDetailsScreen(
                         cityUiState = cityUiState,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = dimensionResource(id = R.dimen.detail_topbar_padding_bottom))
+                        /*
+                                                    .padding(bottom = dimensionResource(id = R.dimen.detail_topbar_padding_bottom))
+                        */
                     )
                 }
                 CityRecommendationsDetailsCard(
@@ -88,19 +90,23 @@ private fun CityDetailsScreenTopBar(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
 
+
     ) {
         IconButton(
             onClick = onBackPressed,
             modifier = Modifier
                 .padding(horizontal = dimensionResource(id = R.dimen.detail_topbar_back_button_padding_horizontal))
-                .background(MaterialTheme.colorScheme.surface, shape = CircleShape),
+                .background(MaterialTheme.colorScheme.surface, shape = CircleShape)
+                .weight(0.8f),
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = stringResource(id = R.string.navigation_back)
             )
         }
-        CityLogo(modifier = Modifier.fillMaxWidth())
+        CityLogo(modifier = Modifier
+            .fillMaxWidth()
+            .weight(2f))
     }
 
 }
