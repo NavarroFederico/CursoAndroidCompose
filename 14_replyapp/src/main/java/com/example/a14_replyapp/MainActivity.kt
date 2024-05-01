@@ -68,7 +68,11 @@ fun ReplyAppMediumPreview() {
         }
     }
 }
-@Preview(showBackground = true, widthDp = 1000)
+
+@Preview(
+    showBackground = true, widthDp = 1000,
+    device = "id:pixel_tablet"
+)
 @Composable
 fun ReplyAppExpandedPreview() {
     ReplyTheme {
