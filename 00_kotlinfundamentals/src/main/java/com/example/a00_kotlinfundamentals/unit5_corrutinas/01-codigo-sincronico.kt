@@ -1,6 +1,7 @@
 package com.example.a00_kotlinfundamentals.unit5_corrutinas
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
 fun main() {
@@ -14,13 +15,12 @@ fun main() {
     println("Execution time: ${time / 1000.0} seconds")
 }
 
-/*
-suspend fun printForecast() {
+suspend private fun printForecast() {
     delay(1000)
     println("Sunny")
 }
 
-suspend fun printTemperature() {
+suspend private fun printTemperature() {
     delay(1000)
     println("30\u00b0C")
-}*/
+}
