@@ -48,15 +48,15 @@ class RaceParticipant(
      * agrega un pequeño delay para retrasar los incrementos de progreso
      */
     suspend fun run() {
-        try {
-            while ( currentProgress < maxProgress){
+        //try {
+            while (currentProgress < maxProgress) {
                 delay(progressDelayMillis)
                 currentProgress += progressIncrement
             }
-        }catch (e: CancellationException){
+        /*} catch (e: CancellationException) {
             Log.e("RaceParticipant", "$name: ${e.message}")
-            throw e //Always re-throw CancellationException.
-        }
+            throw e // Always re-throw CancellationException.
+        }*/
     }
     /**
      * Regardless of the value of [initialProgress] the reset function will reset the

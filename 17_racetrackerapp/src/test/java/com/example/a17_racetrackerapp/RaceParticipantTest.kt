@@ -25,8 +25,11 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class RaceParticipantTest {
+
+
     private val raceParticipant = RaceParticipant(
         name = "Test",
         maxProgress = 100,
