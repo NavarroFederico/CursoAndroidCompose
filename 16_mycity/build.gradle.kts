@@ -51,33 +51,40 @@ android {
 
 dependencies {
 
-    implementation(platform("androidx.compose:compose-bom:2024.04.00"))
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material3:material3-window-size-class")
-    implementation("androidx.compose.runtime:runtime")
-    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.core:core-ktx:1.12.0")
+    //Material3
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.material3:material3-window-size-class")
+
+    implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.compose.runtime:runtime-livedata")
+    //Livecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.extra["lifecycle_version"]}")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.extra["lifecycle_version"]}")
+
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.extra["lifecycle_version"]}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:${rootProject.extra["lifecycle_version"]}")
+    //Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    //Testings
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.04.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
     androidTestImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
 
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     debugImplementation("androidx.compose.ui:ui-tooling")
 
-    implementation("androidx.compose.material:material-icons-extended")
 
 }
