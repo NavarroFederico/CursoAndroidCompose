@@ -7,21 +7,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.a19_amphibiansapp.AmphibiansApplication
 import com.example.a19_amphibiansapp.data.AmphibiansRepository
-import com.example.a19_amphibiansapp.network.Amphibian
+import com.example.a19_amphibiansapp.model.Amphibian
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
+/**
+ * UI state for the Home screen
+ */
 sealed interface AmphibiansUiState {
     data class Success(val amphibians: List<Amphibian>) : AmphibiansUiState
     data object Error : AmphibiansUiState
     data object Loading : AmphibiansUiState
 
 }
-
+/**
+ * ViewModel containing the app data and method to retrieve the data
+ */
 class AmphibiansViewModel(private val amphibiansRepository: AmphibiansRepository) : ViewModel() {
     var amphibiansUiState: AmphibiansUiState by mutableStateOf(AmphibiansUiState.Loading)
         private set
@@ -36,11 +42,16 @@ class AmphibiansViewModel(private val amphibiansRepository: AmphibiansRepository
             try {
                 AmphibiansUiState.Success(amphibiansRepository.getAmphibians())
             }
-            catch (e: Exception) {
+            catch (e: IOException) {
+                AmphibiansUiState.Error
+            } catch (e: HttpException) {
                 AmphibiansUiState.Error
             }
         }
     }
+    /**
+     * Factory for [AmphibiansViewModel] that takes [AmphibiansRepository] as a dependency
+     */
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
