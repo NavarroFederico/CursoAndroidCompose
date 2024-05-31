@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.a20_bookshelf.BookshelfApplication
 import com.example.a20_bookshelf.data.BookshelfRepository
+import com.example.a20_bookshelf.model.BooksVolumesList
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
@@ -18,7 +19,7 @@ import java.io.IOException
  * UI state for the Home screen
  */
 sealed interface BookshelfUiState {
-    data class Success(val bookshelf: String) : BookshelfUiState
+    data class Success(val booksVolumes: BooksVolumesList) : BookshelfUiState
     data object Error : BookshelfUiState
     data object Loading : BookshelfUiState
 
@@ -40,7 +41,7 @@ class BookshelfViewModel(private val bookshelfRepository: BookshelfRepository) :
             bookshelfUiState =
                 try {
                     BookshelfUiState.Success(
-                        bookshelfRepository.getBooksVolumes().booksToHttpsList().toString()
+                        bookshelfRepository.getBooksVolumes()
                     )
                 } catch (e: IOException) {
                     BookshelfUiState.Error
