@@ -33,7 +33,7 @@ fun BookshelfApp() {
             val bookshelfViewModel: BookshelfViewModel = viewModel(factory = BookshelfViewModel.Factory)
             HomeScreen(
                 bookshelfUiState = bookshelfViewModel.bookshelfUiState,
-                retryAction = bookshelfViewModel::getBookshelves,
+                retryAction = bookshelfViewModel::getBooks,
                 contentPadding = it
             )
         }

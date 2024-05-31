@@ -2,10 +2,10 @@ package com.example.a20_bookshelf.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,16 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.a20_bookshelf.R
 import com.example.a20_bookshelf.model.Book
 
@@ -41,16 +37,17 @@ fun HomeScreen(
 ) {
     when (bookshelfUiState) {
         is BookshelfUiState.Loading -> LoadingScreen(modifier = modifier)
-        is BookshelfUiState.Success -> BookshelfListScreen(
-            bookshelves = bookshelfUiState.bookshelf,
-            modifier = modifier
-                .padding(
-                    start = dimensionResource(id = R.dimen.padding_medium),
-                    top = dimensionResource(id = R.dimen.padding_medium),
-                    end = dimensionResource(id = R.dimen.padding_medium),
-                ),
-            contentPadding = contentPadding
-        )
+        is BookshelfUiState.Success -> ResultScreen(string = bookshelfUiState.bookshelf)
+        /*BookshelfListScreen(
+        books = bookshelfUiState.bookshelf,
+        modifier = modifier
+            .padding(
+                start = dimensionResource(id = R.dimen.padding_medium),
+                top = dimensionResource(id = R.dimen.padding_medium),
+                end = dimensionResource(id = R.dimen.padding_medium),
+            ),
+        contentPadding = contentPadding
+    )*/
 
         is BookshelfUiState.Error
 
@@ -61,6 +58,15 @@ fun HomeScreen(
     }
 }
 
+@Composable
+fun ResultScreen(string: String, modifier: Modifier = Modifier) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+    ) {
+        Text(text = string)
+    }
+}
 /**
  * The home screen displaying the loading message.
  */
@@ -135,7 +141,7 @@ fun BookshelfCard(bookshelf: Book, modifier: Modifier) {
 
 @Composable
 fun BookshelfListScreen(
-    bookshelves: List<Book>,
+    books: List<Book>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -144,7 +150,7 @@ fun BookshelfListScreen(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        items(items = bookshelves) { bookshelf ->
+        items(items = books) { bookshelf ->
             BookshelfCard(
                 bookshelf = bookshelf, modifier = modifier
                     .fillMaxSize()
