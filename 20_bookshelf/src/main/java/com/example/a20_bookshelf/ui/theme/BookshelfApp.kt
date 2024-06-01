@@ -1,12 +1,12 @@
 package com.example.a20_bookshelf.ui.theme
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -42,7 +42,7 @@ fun BookshelfApp() {
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun BookshelfTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = Modifier){
-    TopAppBar(
+    CenterAlignedTopAppBar(
         scrollBehavior = scrollBehavior,
         title = {
             Text(
@@ -50,6 +50,9 @@ fun BookshelfTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifi
                 style = MaterialTheme.typography.headlineLarge,
             )
         },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
         modifier = modifier
     )
 

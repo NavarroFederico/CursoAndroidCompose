@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.a20_bookshelf.R
-import com.example.a20_bookshelf.data.util.toHttps
 import com.example.a20_bookshelf.model.Book
 import com.example.a20_bookshelf.model.BooksVolumesList
 
@@ -48,16 +47,18 @@ fun HomeScreen(
     when (bookshelfUiState) {
         is BookshelfUiState.Loading -> LoadingScreen(modifier = modifier)
         is BookshelfUiState.Success ->
-        BooksGridScreen(
-        books = bookshelfUiState.booksVolumes,
-        modifier = modifier
-            .padding(
-                start = dimensionResource(id = R.dimen.padding_medium),
-                top = dimensionResource(id = R.dimen.padding_medium),
-                end = dimensionResource(id = R.dimen.padding_medium),
-            ),
-        contentPadding = contentPadding
-    )
+
+            BooksGridScreen(
+                books = bookshelfUiState.booksVolumes,
+                modifier = modifier,
+                contentPadding = contentPadding
+            )
+        //Opcion 2
+        /*BookshelfListScreen(
+            books = bookshelfUiState.booksVolumes,
+            modifier = modifier,
+            contentPadding = contentPadding
+        )*/
 
         is BookshelfUiState.Error
 
@@ -77,6 +78,7 @@ fun ResultScreen(string: String, modifier: Modifier = Modifier) {
         Text(text = string)
     }
 }
+
 /**
  * The home screen displaying the loading message.
  */
@@ -111,7 +113,7 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BookshelfCard(bookshelf: String, modifier: Modifier) {
+fun BookshelfCard(book: Book, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
@@ -120,27 +122,15 @@ fun BookshelfCard(bookshelf: String, modifier: Modifier) {
     {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "",
+                text = book.volumeInfo.title,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Start
             )
-           /* AsyncImage(
-                modifier = Modifier.fillMaxWidth(),
-                model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(amphibian.imgSrc)
-                    .crossfade(true)
-                    .build(),
-                error = painterResource(id = R.drawable.ic_broken_image),
-                placeholder = painterResource(id = R.drawable.loading_img),
-                contentDescription = stringResource(
-                    id = R.string.amphinian_image
-                ),
-                contentScale = ContentScale.Crop,
-            )*/
+            BookImageItem(book = book)
             Text(
-                text = "",
+                text = book.volumeInfo.description,
                 textAlign = TextAlign.Justify,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
                 style = MaterialTheme.typography.titleMedium
@@ -148,8 +138,9 @@ fun BookshelfCard(bookshelf: String, modifier: Modifier) {
         }
     }
 }
+
 @Composable
-fun BookImageItem(book: Book, modifier: Modifier =Modifier){
+fun BookImageItem(book: Book, modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
         AsyncImage(
             modifier = Modifier.fillMaxWidth(),
@@ -166,7 +157,8 @@ fun BookImageItem(book: Book, modifier: Modifier =Modifier){
     }
 
 }
-/*@Composable
+
+@Composable
 fun BookshelfListScreen(
     books: BooksVolumesList,
     modifier: Modifier = Modifier,
@@ -177,26 +169,30 @@ fun BookshelfListScreen(
         contentPadding = contentPadding,
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        items(items = books) { book ->
-           BookImageItem(bookUrl = book)
+        items(items = books.books) { book ->
+            BookshelfCard(book = book)
 
         }
     }
-}*/
+}
+
 @Composable
 fun BooksGridScreen(
     books: BooksVolumesList,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 
-){
-    LazyVerticalGrid(columns = GridCells.Adaptive(150.dp),
-        modifier = modifier
-            .padding(horizontal = 4.dp),
-        contentPadding = contentPadding, ) {
-            items(items = books.books) { book ->
-                BookImageItem(book = book)
-            }
+) {
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(150.dp),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
+        modifier = modifier.padding((dimensionResource(id = R.dimen.padding_small))),
+        contentPadding = contentPadding,
+    ) {
+        items(items = books.books) { book ->
+            BookImageItem(book = book)
+        }
 
     }
 }
