@@ -35,4 +35,8 @@
     <string name="sell">Sell</string>
     <string name="yes">Yes</string>
     <string name="required_fields">*required fields</string>
+    <string name="perfil_extendido">Perfil extendido</string>
+    <string name="carreras_extendida">Carreras extendida</string>
+    <string name="office_365">Office 365</string>
+    <string name="mapa">Mapa</string>
 </resources>

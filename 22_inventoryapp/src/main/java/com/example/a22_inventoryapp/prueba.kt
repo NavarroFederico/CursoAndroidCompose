@@ -1,5 +1,7 @@
 package com.example.a22_inventoryapp
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,13 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview(device = "id:pixel_4")
+@Preview(device = "id:Nexus One")
 @Composable
 fun UserCard(modifier: Modifier = Modifier) {
     Column(
@@ -67,174 +71,79 @@ fun UserCard(modifier: Modifier = Modifier) {
                         .fillMaxWidth()
                         .padding(5.dp)
                 ) {
-                    Column(
+                    NavigationItem(
+                        label = R.string.perfil_extendido,
+                        imageVector = Icons.Default.AccountCircle,
                         modifier = Modifier
                             .weight(1f)
-                            .padding(10.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        IconButton(
-                            modifier = Modifier
-                                .shadow(12.dp, CardDefaults.shape)
-                                .background(Color(203, 228, 222))
-                                .padding(5.dp),
-                            onClick = {
-                                // navController.navigate(route = ScreenNav.Perfil.route)
-                            }
-                        )
-                        {
-                            Icon(
-                                imageVector = Icons.Default.AccountCircle,
-                                contentDescription = null,
-                                tint = Color(0, 100, 100),
-                                modifier = Modifier
-                            )
-                        }
-                        Text(
-                            modifier = modifier.padding(
-                                start = 0.dp,
-                                top = 10.dp,
-                                bottom = 5.dp
-                            ),
-                            textAlign = TextAlign.Center,
-                            fontSize = 13.sp,
-                            color = Color(0, 100, 100),
-                            text = "Perfil extendido",
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
 
-                        )
-                    }
-
-
-                    Column(
+                    )
+                    NavigationItem(
+                        label = R.string.carreras_extendida,
+                        imageVector = Icons.AutoMirrored.Filled.MenuBook,
                         modifier = Modifier
                             .weight(1f)
-                            .padding(10.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        IconButton(
-                            modifier = Modifier
-                                .shadow(12.dp, CardDefaults.shape)
-                                .background(Color(203, 228, 222))
-                                .padding(3.dp),
-                            onClick = {
 
-                                //navController.navigate(route = ScreenNav.Carreras.route)
-                            }
-                        )
-                        {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.MenuBook,
-                                contentDescription = null,
-                                tint = Color(0, 100, 100),
-                                modifier = Modifier
-                            )
-                        }
-                        Text(
-                            modifier = Modifier.padding(
-                                start = 5.dp,
-                                top = 10.dp,
-                                bottom = 5.dp
-                            ),
-                            textAlign = TextAlign.Center,
-                            fontSize = 13.sp,
-                            color = Color(0, 100, 100),
-                            text = "Carreras extendida",
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-
-                        )
-                    }
-
-
-
-                    Column(
+                    )
+                    NavigationItem(
+                        label = R.string.office_365,
+                        imageVector = Icons.Default.Email,
                         modifier = Modifier
                             .weight(1f)
-                            .padding(10.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        IconButton(
-                            modifier = Modifier
-                                .shadow(12.dp, CardDefaults.shape)
-                                .background(Color(203, 228, 222))
-                                /* .background(Color(203, 228, 222)) ESTE COLOR ME GUSTA MUCHO*/
-                                .padding(3.dp),
-                            onClick = {
-                                // navController.navigate(route = ScreenNav.Office.route)
-                            }
-                        )
-                        {
-                            Icon(
-                                imageVector = Icons.Default.Email,
-                                contentDescription = null,
-                                tint = Color(0, 100, 100),
-                                modifier = Modifier
-                            )
-                        }
-                        Text(
-                            modifier = Modifier.padding(
-                                start = 5.dp,
-                                top = 10.dp,
-                                bottom = 5.dp
-                            ),
-                            textAlign = TextAlign.Center,
-                            fontSize = 13.sp,
-                            color = Color(0, 100, 100),
-                            text = "Office 365",
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
 
-                    Column(
+                    )
+                    NavigationItem(
+                        label = R.string.mapa,
+                        imageVector = Icons.Default.Map,
                         modifier = Modifier
                             .weight(1f)
-                            .padding(10.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        IconButton(
-                            modifier = Modifier
-                                .shadow(12.dp, CardDefaults.shape)
-                                .background(Color(203, 228, 222))
-                                .padding(3.dp),
-                            onClick = {
 
-                                //navController.navigate(route = ScreenNav.Maps.route)
-                            }
-                        )
-                        {
-                            Icon(
-                                imageVector = Icons.Default.Map,
-                                contentDescription = null,
-                                tint = Color(0, 100, 100),
-                                modifier = Modifier
-                            )
-                        }
-                        Text(
-                            modifier = Modifier.padding(
-                                start = 5.dp,
-                                top = 10.dp,
-                                bottom = 5.dp
-                            ),
-                            textAlign = TextAlign.Center,
-                            fontSize = 13.sp,
-                            color = Color(0, 100, 100),
-                            text = "Mapa",
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-
+                    )
                 }
-
             }
         }
 
     }
+}
+
+@Composable
+fun NavigationItem(@StringRes label: Int, imageVector: ImageVector, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.padding(10.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        IconButton(
+            modifier = Modifier
+                .shadow(12.dp, CardDefaults.shape)
+                .background(Color(203, 228, 222))
+                .padding(5.dp),
+            onClick = {
+                // navController.navigate(route = ScreenNav.Perfil.route)
+            }
+        )
+        {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = null,
+                tint = Color(0, 100, 100),
+                modifier = Modifier
+            )
+        }
+        Text(
+            modifier = Modifier.padding(
+                start = 0.dp,
+                top = 10.dp,
+                bottom = 5.dp
+            ),
+            textAlign = TextAlign.Center,
+            fontSize = 13.sp,
+            color = Color(0, 100, 100),
+            text = stringResource(label),
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+
+        )
+    }
+
 }
