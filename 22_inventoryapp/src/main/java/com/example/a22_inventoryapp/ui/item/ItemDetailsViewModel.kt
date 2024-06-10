@@ -52,6 +52,10 @@ class ItemDetailsViewModel(
         private const val TIMEOUT_MILLIS = 5_000L
     }
 
+    suspend fun deleteItem() {
+        itemsRepository.deleteItem(uiState.value.itemDetails.toItem())
+    }
+
     fun reduceQuantityByOne() {
         viewModelScope.launch {
             val currentItem = uiState.value.itemDetails.toItem()
@@ -60,6 +64,7 @@ class ItemDetailsViewModel(
             }
         }
     }
+
 }
 
 /**
