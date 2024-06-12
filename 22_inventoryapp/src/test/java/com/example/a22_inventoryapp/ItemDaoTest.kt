@@ -37,6 +37,13 @@ class ItemDaoTest {
 
     @Test
     @Throws(Exception::class)
+    fun daoGetItem_returnsItemFromDB() = runBlocking {
+        addOneItemToDb()
+        val item = itemDao.getItem(1)
+        assertEquals(item.first(), item1)
+    }
+    @Test
+    @Throws(Exception::class)
     fun daoDeleteItems_deletesAllItemsFromDB() = runBlocking {
         addTwoItemsToDb()
         itemDao.delete(item1)
