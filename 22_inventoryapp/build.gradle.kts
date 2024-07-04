@@ -52,11 +52,12 @@ android {
 
 dependencies {
 
-    implementation(platform("androidx.compose:compose-bom:2024.05.00"))
+    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-tooling-preview")
     //Material3
     implementation("androidx.compose.material3:material3")
@@ -69,9 +70,8 @@ dependencies {
 
     //Room
     implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
-
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
-    // To use Kotlin Symbol Processing (KSP)
+    implementation("androidx.test.ext:junit-ktx:1.2.1")
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}" )
 
     // Retrofit
@@ -88,24 +88,25 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.4.0")
 
     //Testings
-    implementation("androidx.test.ext:junit-ktx:1.1.5")
-    implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
-    // optional - Test helpers
-    testImplementation("androidx.room:room-testing:${rootProject.extra["room_version"]}")
+    /*  implementation("androidx.test.ext:junit-ktx:1.1.5")
+      implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
+      testImplementation("junit:junit:4.13.2")
+      testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+      // optional - Test helpers
+      testImplementation("androidx.room:room-testing:${rootProject.extra["room_version"]}")*/
 
-    androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test:runner:1.5.2") // Agrega esta línea
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    /*  androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
+      androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+      androidTestImplementation("androidx.test:runner:1.5.2") // Agrega esta línea*/
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     //Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    /*  androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
+      androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
+      debugImplementation("androidx.compose.ui:ui-tooling")
+      debugImplementation("androidx.compose.ui:ui-test-manifest")*/
 
     // Retrofit with scalar Converter
-    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    /* implementation("com.squareup.retrofit2:converter-scalars:2.9.0")*/
 }

@@ -1,5 +1,6 @@
 package com.example.a22_inventoryapp
 
+
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
@@ -26,6 +27,24 @@ class ItemDaoTest {
     private var item1 = Item(1, "Apples", 10.0, 20)
     private var item2 = Item(2, "Bananas", 15.0, 97)
 
+    @Before
+    fun createDb() {
+        val context: Context = ApplicationProvider.getApplicationContext()
+        // Using an in-memory database because the information stored here disappears when the
+        // process is killed.
+        inventoryDatabase = Room.inMemoryDatabaseBuilder(context, InventoryDatabase::class.java)
+            // Allowing main thread queries, just for testing.
+            .allowMainThreadQueries()
+            .build()
+        itemDao = inventoryDatabase.itemDao()
+    }
+
+
+    @After
+    @Throws(IOException::class)
+    fun closeDb() {
+        inventoryDatabase.close()
+    }
     private suspend fun addOneItemToDb() {
         itemDao.insert(item1)
     }
@@ -80,22 +99,5 @@ class ItemDaoTest {
         assertEquals(allItems[1], item2)
     }
 
-    @Before
-    fun createDb() {
-        val context: Context = ApplicationProvider.getApplicationContext()
-        // Using an in-memory database because the information stored here disappears when the
-        // process is killed.
-        inventoryDatabase = Room.inMemoryDatabaseBuilder(context, InventoryDatabase::class.java)
-            // Allowing main thread queries, just for testing.
-            .allowMainThreadQueries()
-            .build()
-        itemDao = inventoryDatabase.itemDao()
-    }
 
-
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        inventoryDatabase.close()
-    }
 }
