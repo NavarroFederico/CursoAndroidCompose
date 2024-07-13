@@ -5,7 +5,7 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
+        <option name="gradleJvm" value="jbr-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/19_amphibiansapp" />
             <option value="$PROJECT_DIR$/20_bookshelf" />
             <option value="$PROJECT_DIR$/21_sqldemo" />
+            <option value="$PROJECT_DIR$/22_inventoryapp" />
             <option value="$PROJECT_DIR$/calculatordiscounts" />
           </set>
         </option>
