@@ -44,7 +44,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.a22_inventoryapp.InventoryTopAppBar
 import com.example.a22_inventoryapp.R
 import com.example.a22_inventoryapp.ui.AppViewModelProvider
-
 import com.example.a22_inventoryapp.ui.navigation.NavigationDestination
 import com.example.a22_inventoryapp.ui.theme.InventoryTheme
 import kotlinx.coroutines.launch
@@ -195,3 +194,4 @@ private fun ItemEntryScreenPreview() {
         ), onItemValueChange = {}, onSaveClick = {})
     }
 }
+

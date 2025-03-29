@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Calculadora de Descuento</string>
+    <string name="purchase_price_req">Precio de compra o producto</string>
+    <string name="save_calculation">Guardar calculo</string>
+</resources>
