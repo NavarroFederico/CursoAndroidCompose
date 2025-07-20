@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.a20_bookshelf"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.a20_bookshelf"
